@@ -56,12 +56,11 @@ const ContactDialog: React.FC = () => {
     <Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
       <DialogContent className="sm:max-w-[425px]">
         <BlurFade delay={BLUR_FADE_DELAY}>
-
-         <img
+         {/* <img
               src="/images/DSC00815.png"
               alt="Contact banner"
               className="h-40 object-cover mb-6 rounded-lg"
-            />
+            /> */}
           <DialogHeader className="space-y-3">
             <DialogTitle className="text-2xl font-bold">
               Send me a message

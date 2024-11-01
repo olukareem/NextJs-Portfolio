@@ -1,6 +1,5 @@
 "use client";
 import { Dock, DockIcon } from "@/components/ui/dock";
-import { ThemeToggle } from "@/components/theme-toggle";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -14,9 +13,7 @@ import Link from "next/link";
 import { RiContactsBookUploadFill } from "react-icons/ri";
 
 import { useContactDialog } from "@/contexts/contact-dialog-context";
-import AIChatButton from "./AIChatButton";
 import { PiLightningBold, PiLightningSlashFill } from "react-icons/pi";
-import theme from "tailwindcss/defaultTheme";
 import { useTheme } from "next-themes";
 import { BsRobot } from "react-icons/bs";
 import { useState } from "react";

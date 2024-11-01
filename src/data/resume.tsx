@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { BotIcon, ContactIcon, HomeIcon, NotebookIcon } from "lucide-react";
+import { HomeIcon } from "lucide-react";
 import { CgWebsite } from "react-icons/cg";
 
 export const DATA = {

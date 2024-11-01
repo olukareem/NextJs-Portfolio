@@ -9,7 +9,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { DATA } from "@/data/resume";
 import Image from "next/image";
-import Link from "next/link";
 import Markdown from "react-markdown";
 import dynamic from "next/dynamic";
 import { useState } from "react";
