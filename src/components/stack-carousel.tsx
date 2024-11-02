@@ -8,10 +8,18 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 
-const CarouselSection: React.FC<{ title: string; data: any[] }> = ({
-  title,
-  data,
-}) => {
+interface StackItem {
+  name: string;
+  imageUrl: string;
+  description: string;
+}
+
+interface CarouselSectionProps {
+  title: string;
+  data: readonly StackItem[];
+}
+
+const CarouselSection: React.FC<CarouselSectionProps> = ({ title, data }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
   const inView = useInView(carouselRef, { once: false });
@@ -136,8 +144,13 @@ const CarouselSection: React.FC<{ title: string; data: any[] }> = ({
   );
 };
 
+interface Section {
+  title: string;
+  data: readonly StackItem[];
+}
+
 const StackCarousel: React.FC = () => {
-  const sections = [
+  const sections: readonly Section[] = [
     { title: "Languages", data: DATA.languages },
     { title: "Frameworks", data: DATA.frameworks },
     { title: "Developer Tools", data: DATA.devTools },
