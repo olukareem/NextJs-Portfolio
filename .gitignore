@@ -34,4 +34,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-structure.mdxsendgrid.env
+structure.mdxsendgrid.env*.mp4
+*.mov
+*.avi
+*.wmv
+*.flv
+*.mkv
+*.mp4
+*.mov
+*.avi
+*.wmv
+*.flv
+*.mkv
