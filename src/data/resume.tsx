@@ -1,5 +1,5 @@
 import { Icons } from "@/components/icons";
-import { HomeIcon } from "lucide-react";
+import { Apple, HomeIcon, Smartphone } from "lucide-react";
 import { CgWebsite } from "react-icons/cg";
 
 export const DATA = {
@@ -432,10 +432,13 @@ export const DATA = {
         {
           type: "Android",
           href: "https://play.google.com/store/apps/details?id=com.splice.mobile&pcampaignid=web_share",
+          icon: <Smartphone className="size-3" />,
+
         },
         {
           type: "iOS",
           href: "https://apps.apple.com/us/app/splice-make-more-music/id1108532275",
+          icon: <Apple className="size-3" />,
         },
       ],
       image: "",
