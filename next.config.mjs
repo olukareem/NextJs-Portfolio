@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["pub-83c5db439b40468498f97946200806f7.r2.dev"],
+    domains: ['pub-83c5db439b40468498f97946200806f7.r2.dev'],
+    unoptimized: true
   },
   reactStrictMode: true,
   webpack(config) {
@@ -22,5 +23,7 @@ const nextConfig = {
     },
     scrollRestoration: true,
   },
+  output: 'standalone'
 };
+
 export default nextConfig;

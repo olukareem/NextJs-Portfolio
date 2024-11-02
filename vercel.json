@@ -1,13 +1,8 @@
 {
-    "builds": [
-      {
-        "src": "package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "installCommand": "pnpm install",
-          "buildCommand": "pnpm run build"
-        }
-      }
-    ],
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }]
-  }
+  "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "pnpm build",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+}
