@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ["pub-83c5db439b40468498f97946200806f7.r2.dev"],
+  },
   reactStrictMode: true,
   webpack(config) {
     config.module.rules.push({
@@ -8,13 +11,10 @@ const nextConfig = {
     });
     return config;
   },
-  // Add compiler options to help with hydration
   compiler: {
-    // Suppress hydration warnings
     reactRemoveProperties: process.env.NODE_ENV === "production",
     removeConsole: process.env.NODE_ENV === "production",
   },
-  // Configure experimental features
   experimental: {
     serverActions: {
       bodySizeLimit: "2mb",
@@ -23,5 +23,4 @@ const nextConfig = {
     scrollRestoration: true,
   },
 };
-
 export default nextConfig;
