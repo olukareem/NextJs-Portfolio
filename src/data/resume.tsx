@@ -107,7 +107,7 @@ export const DATA = {
     },
     {
       name: "OpenAI",
-      imageUrl: "/skill-icons/openai.svg",
+      imageUrl: "/skill-icons/openAI.svg",
       description:
         "I've integrated OpenAI's GPT models to build AI-powered features, including a custom chatbot for my portfolio that can engage with visitors and answer questions about my experience.",
     },
@@ -379,7 +379,7 @@ export const DATA = {
       school: "General Assembly",
       degree: "Fullstack Software Engineering Bootcamp",
       href: "https://generalassemb.ly/",
-      logoUrl: "/business-logos/ga.png",
+      logoUrl: "/business-logos/GA.png",
       start: "2020",
       end: "2020",
       description:
@@ -433,7 +433,6 @@ export const DATA = {
           type: "Android",
           href: "https://play.google.com/store/apps/details?id=com.splice.mobile&pcampaignid=web_share",
           icon: <Smartphone className="size-3" />,
-
         },
         {
           type: "iOS",
