@@ -363,7 +363,7 @@ export const DATA = {
       start: "2021",
       end: "2024",
       description:
-        "At Splice, I worked on both mobile and desktop applications, including Splice Mobile, Splice Bridge, and Splice Desktop. I developed front-end components for CoSo, an AI-assisted music creation platform, using technologies like Flutter, Dart, GraphQL, Android Studio, and Xcode. I was responsible for maintaining and enhancing the Splice Mobile app and worked on analytics tracking with Segment. On the desktop side, I contributed to key front-end features for Splice Bridge and Splice Desktop, such as music sample transposition, DAW integrations, and asset management. I used TypeScript, AngularJS, Node.js, and Electron.js to create seamless user experiences. I also collaborated with designers and participated in code reviews and testing to ensure smooth functionality and alignment.",
+        "At Splice, I initially focused on desktop applications (2021-2022), developing key front-end features for Splice Bridge and Splice Desktop using TypeScript, AngularJS, Node.js, and Electron.js. This included music sample transposition, DAW integrations, and asset management. Later (2022-2024), I transitioned to mobile development, working on Splice Mobile and CoSo, an AI-assisted music creation platform. Using Flutter, Dart, GraphQL, Android Studio, and Xcode, I developed front-end components, maintained both front-end and back-end, and implemented analytics tracking with Segment. Throughout my tenure, I collaborated with designers and participated in code reviews and testing to ensure smooth functionality and alignment.",
     },
     {
       company: "Public Records",
