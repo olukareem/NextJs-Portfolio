@@ -2,6 +2,10 @@ import { Icons } from "@/components/icons";
 import { Apple, HomeIcon, Smartphone } from "lucide-react";
 import { CgWebsite } from "react-icons/cg";
 
+const createIcon = (Icon: any, className = "size-3") => {
+  return <Icon className={className} />;
+};
+
 export const DATA = {
   name: "Olu Kareem",
   initials: "OK",
@@ -392,13 +396,14 @@ export const DATA = {
       href: "/",
       dates: "2024",
       active: true,
-      description: "",
+      description:
+        "Otion is a Notion-style document editor with real-time database capabilities, featuring infinite nested documents, file management, and a fully responsive design. The app includes dark/light modes, authentication, file uploads with trash/recovery features, and the ability to publish notes to the web.",
       technologies: ["Next.js", "React", "Convex", "Tailwind", "Shadcn UI"],
       links: [
         {
           type: "Website",
           href: "https://chatcollect.com",
-          icon: <Icons.globe className="size-3" />,
+          icon: createIcon(Icons.globe),
         },
       ],
       image: "",
@@ -411,7 +416,7 @@ export const DATA = {
       dates: "2022 - 2024",
       active: true,
       description:
-        "Developed front-end components and purchase asset flows for CoSo, an AI-assisted music creation platform. Maintained and enhanced both the front-end and back-end of Splice Mobile using Dart and GraphQL. Contributed to the unification of CoSo and Splice Mobile into a single app. Additionally, worked on analytics tracking using Segment.",
+        "Splice Mobile is a comprehensive music production app that enables users to create multi-layered compositions using samples, presets, MIDI, and creative tools from the Splice catalog. I developed front-end components and purchase asset flows for CoSo, an AI-assisted music creation platform, maintained both front-end and back-end using Dart and GraphQL, contributed to the unification of CoSo and Splice Mobile into a single app, and implemented analytics tracking using Segment.",
       technologies: [
         "Flutter",
         "Dart",
@@ -427,21 +432,22 @@ export const DATA = {
         {
           type: "About",
           href: "https://splice.com/tools/mobile",
-          icon: <Icons.globe className="size-3" />,
+          icon: createIcon(Icons.globe),
         },
         {
           type: "Android",
           href: "https://play.google.com/store/apps/details?id=com.splice.mobile&pcampaignid=web_share",
-          icon: <Smartphone className="size-3" />,
+          icon: createIcon(Smartphone),
         },
         {
           type: "iOS",
           href: "https://apps.apple.com/us/app/splice-make-more-music/id1108532275",
-          icon: <Apple className="size-3" />,
+          icon: createIcon(Apple),
         },
       ],
       image: "",
-      video: "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/09315f52825b209740156edf4cff7a11/manifest/video.m3u8",
+      video:
+        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/09315f52825b209740156edf4cff7a11/manifest/video.m3u8",
     },
     {
       title: "Splice Bridge",
@@ -449,7 +455,7 @@ export const DATA = {
       dates: "2021 - 2022",
       active: true,
       description:
-        "Developed the transpose component, enabling users to adjust the key and BPM of their music samples. Created front-end coachmark and toast components. Implemented the 'Copy to DAW' feature for assets. Developed the Bridge companion app and worked on the feature allowing users to open Bridge directly within their DAW.",
+        "Splice Bridge is a specialized plugin that seamlessly integrates with your DAW to preview Splice samples in real-time, automatically matching them to your project's tempo and key. I developed the transpose component for key and BPM adjustments, created front-end coachmark and toast components, implemented the 'Copy to DAW' feature, and worked on the Bridge companion app with direct DAW integration.",
       technologies: [
         "Typescript",
         "Angular",
@@ -467,7 +473,8 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/6f485552046d41ad7bd4397d9c8279df/manifest/video.m3u8",
+      video:
+        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/6f485552046d41ad7bd4397d9c8279df/manifest/video.m3u8",
     },
     {
       title: "Splice Desktop",
@@ -475,7 +482,7 @@ export const DATA = {
       dates: "2021 - 2022",
       active: true,
       description:
-        "Developed front-end components using Angular and TypeScript. Managed the component library with Storybook.js. Implemented asset actions such as adding to the library, purchasing assets, marking favorites, and spending credits.",
+        "Splice Desktop is a central hub for music production that provides access to millions of royalty-free sounds, loops, FX, MIDI, and presets with direct DAW integration. I developed front-end components using Angular and TypeScript, managed the component library with Storybook.js, and implemented asset management features including library additions, purchases, favorites, and credit spending.",
       technologies: [
         "Typescript",
         "Angular",
@@ -493,7 +500,8 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/1e6d5c239874f261895ca7e2bcc3142e/manifest/video.m3u8",
+      video:
+        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/1e6d5c239874f261895ca7e2bcc3142e/manifest/video.m3u8",
     },
   ],
 } as const;
