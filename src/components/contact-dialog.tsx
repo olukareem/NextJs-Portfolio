@@ -129,9 +129,3 @@ const ContactDialog: React.FC = () => {
 };
 
 export default ContactDialog;
-
-         {/* <img
-              src="/images/DSC00815.png"
-              alt="Contact banner"
-              className="h-40 object-cover mb-6 rounded-lg"
-            /> */}
