@@ -441,7 +441,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "/videos/splice_mobile_featured.mp4",
+      video: "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/09315f52825b209740156edf4cff7a11/manifest/video.m3u8",
     },
     {
       title: "Splice Bridge",
@@ -467,7 +467,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "videos/splice_bridge_clipped.mov",
+      video: "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/6f485552046d41ad7bd4397d9c8279df/manifest/video.m3u8",
     },
     {
       title: "Splice Desktop",
@@ -493,7 +493,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "videos/splice_desktop_clipped.mov",
+      video: "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/1e6d5c239874f261895ca7e2bcc3142e/manifest/video.m3u8",
     },
   ],
 } as const;

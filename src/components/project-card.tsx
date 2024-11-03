@@ -10,7 +10,8 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Hls from "hls.js";
 
 interface Props {
   title: string;
@@ -42,10 +43,35 @@ export function ProjectCard({
   className,
 }: Props) {
   const [isMounted, setIsMounted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  useEffect(() => {
+    if (isMounted && video && videoRef.current) {
+      const videoElement = videoRef.current;
+      
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(video);
+        hls.attachMedia(videoElement);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          videoElement.play().catch((error) => {
+            console.log("Autoplay prevented:", error);
+          });
+        });
+      }
+      // For browsers that have native HLS support (Safari)
+      else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
+        videoElement.src = video;
+        videoElement.play().catch((error) => {
+          console.log("Autoplay prevented:", error);
+        });
+      }
+    }
+  }, [isMounted, video]);
 
   return (
     <Card
@@ -59,7 +85,7 @@ export function ProjectCard({
       >
         {video && isMounted ? (
           <video
-            src={video}
+            ref={videoRef}
             autoPlay
             loop
             muted
@@ -77,7 +103,6 @@ export function ProjectCard({
           />
         )}
       </Link>
-      {/* Rest of the component remains the same */}
       <CardHeader className="px-2">
         <div className="space-y-1">
           <CardTitle className="mt-1 text-base">{title}</CardTitle>

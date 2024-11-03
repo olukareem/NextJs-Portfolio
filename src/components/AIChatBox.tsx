@@ -4,9 +4,11 @@ import { SendHorizonal, Trash } from "lucide-react";
 import Link from "next/link";
 import { HTMLAttributes, useEffect, useRef } from "react";
 import { BsRobot } from "react-icons/bs";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { AiOutlineCloseSquare } from "react-icons/ai";
 import Markdown from "react-markdown";
-
+import { Button } from "./ui/button";
+import ContactDialog from "@/components/contact-dialog";
+import { useContactDialog } from "@/contexts/contact-dialog-context";
 interface AIChatBoxProps {
   open: boolean;
   onClose: () => void;
@@ -15,6 +17,12 @@ interface AIChatBoxProps {
 interface SampleQuestion {
   text: string;
   description: string;
+}
+
+interface CodeProps extends HTMLAttributes<HTMLElement> {
+  inline?: boolean;
+  className?: string;
+  children?: React.ReactNode;
 }
 
 function ChatWelcome({
@@ -38,21 +46,21 @@ function ChatWelcome({
   ];
 
   return (
-    <div className="flex flex-col h-full items-center justify-center gap-4 text-center mx-8">
+    <div className="flex flex-col h-full items-center justify-center gap-4 text-center mx-2 sm:mx-8">
       <div className="relative">
         <BsRobot size={32} className="text-primary" />
         <span className="absolute bottom-0 right-0 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-xl font-semibold">Hi! I'm Olu's AI Assistant</h3>
-        <p className="text-muted-foreground text-sm">
+        <h3 className="text-lg sm:text-xl font-semibold">Hi! I'm Olu's AI Assistant</h3>
+        <p className="text-muted-foreground text-xs sm:text-sm">
           I can help you learn more about Olu's experience and projects
         </p>
       </div>
 
       <div className="w-full max-w-sm space-y-2">
-        <p className="text-sm font-medium text-muted-foreground">
+        <p className="text-xs sm:text-sm font-medium text-muted-foreground">
           Try asking about:
         </p>
         <div className="flex flex-col gap-2">
@@ -60,10 +68,10 @@ function ChatWelcome({
             <button
               key={index}
               onClick={() => onQuestionClick(question.text)}
-              className="w-full px-4 py-2 text-sm text-left transition-colors rounded-md hover:bg-muted group"
+              className="w-full px-3 sm:px-4 py-2 text-xs sm:text-sm text-left transition-colors rounded-md hover:bg-muted group"
             >
               <div className="font-medium">{question.text}</div>
-              <div className="text-xs text-muted-foreground group-hover:text-muted-foreground/70">
+              <div className="text-[10px] sm:text-xs text-muted-foreground group-hover:text-muted-foreground/70">
                 {question.description}
               </div>
             </button>
@@ -71,7 +79,7 @@ function ChatWelcome({
         </div>
       </div>
 
-      <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-2">
+      <div className="flex flex-wrap justify-center items-center gap-1.5 text-[10px] sm:text-xs text-muted-foreground mt-2">
         <span className="flex items-center gap-1">
           <BsRobot size={12} />
           Powered by
@@ -90,31 +98,20 @@ function ChatWelcome({
   );
 }
 
-interface ChatMessageProps {
-  message: Message;
-}
-
-interface CodeProps extends HTMLAttributes<HTMLElement> {
-  className?: string;
-  inline?: boolean;
-  node?: any;
-  children?: React.ReactNode;
-}
-
-function ChatMessage({ message: { role, content } }: ChatMessageProps) {
+function ChatMessage({ message: { role, content } }: { message: Message }) {
   const isAiMessage = role === "assistant";
 
   return (
     <div
       className={cn(
-        "mb-3 flex items-start", // Changed to items-start to align content properly
-        isAiMessage ? "me-5 justify-start" : "ms-5 justify-end"
+        "mb-3 flex items-start",
+        isAiMessage ? "me-2 sm:me-5 justify-start" : "ms-2 sm:ms-5 justify-end"
       )}
     >
       {isAiMessage && <BsRobot className="mr-2 flex-none mt-1" />}
       <div
         className={cn(
-          "rounded-md border px-4 py-3 max-w-[85%]", // Added max-width and improved padding
+          "rounded-md border px-3 sm:px-4 py-2 sm:py-3 max-w-[90%] sm:max-w-[85%] text-sm sm:text-base",
           isAiMessage ? "bg-background" : "bg-foreground text-background"
         )}
       >
@@ -127,10 +124,9 @@ function ChatMessage({ message: { role, content } }: ChatMessageProps) {
                 href={props.href ?? ""}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline inline-flex items-center gap-1"
+                className="text-primary hover:underline inline-flex items-center gap-1 break-words"
               >
                 {props.children}
-                {/* Optional: Add external link icon */}
                 <svg
                   className="h-3 w-3 inline"
                   fill="none"
@@ -147,77 +143,53 @@ function ChatMessage({ message: { role, content } }: ChatMessageProps) {
               </Link>
             ),
             
-            // Paragraphs
             p: ({ node, ...props }) => (
-              <p {...props} className="mt-3 first:mt-0 leading-relaxed" />
+              <p {...props} className="mt-2 sm:mt-3 first:mt-0 leading-relaxed break-words" />
             ),
             
-            // Headings
             h1: ({ node, ...props }) => (
-              <h1 {...props} className="text-2xl font-bold mt-6 mb-4 first:mt-0" />
+              <h1 {...props} className="text-xl sm:text-2xl font-bold mt-4 sm:mt-6 mb-3 sm:mb-4 first:mt-0" />
             ),
             h2: ({ node, ...props }) => (
-              <h2 {...props} className="text-xl font-bold mt-5 mb-3 first:mt-0" />
+              <h2 {...props} className="text-lg sm:text-xl font-bold mt-4 sm:mt-5 mb-2 sm:mb-3 first:mt-0" />
             ),
             h3: ({ node, ...props }) => (
-              <h3 {...props} className="text-lg font-bold mt-4 mb-2 first:mt-0" />
+              <h3 {...props} className="text-base sm:text-lg font-bold mt-3 sm:mt-4 mb-2 first:mt-0" />
             ),
             
-            // Lists
             ul: ({ node, ...props }) => (
-              <ul
-                {...props}
-                className="mt-3 mb-3 list-inside list-disc first:mt-0 space-y-1"
-              />
+              <ul {...props} className="mt-2 sm:mt-3 mb-2 sm:mb-3 list-inside list-disc first:mt-0 space-y-1" />
             ),
             ol: ({ node, ...props }) => (
-              <ol
-                {...props}
-                className="mt-3 mb-3 list-inside list-decimal first:mt-0 space-y-1"
-              />
+              <ol {...props} className="mt-2 sm:mt-3 mb-2 sm:mb-3 list-inside list-decimal first:mt-0 space-y-1" />
             ),
             li: ({ node, children, ...props }) => (
-              <li 
-                {...props} 
-                className="leading-relaxed ml-4"
-              >
-                {children}
-              </li>
+              <li {...props} className="leading-relaxed ml-2 sm:ml-4 break-words">{children}</li>
             ),
             
-            // Code blocks
             code: ({ inline, className, children, ...props }: CodeProps) => {
               const isInline = inline ?? false;
               return isInline ? (
-                <code
-                  className="px-1.5 py-0.5 rounded-md bg-muted font-mono text-sm"
-                  {...props}
-                >
+                <code className="px-1 sm:px-1.5 py-0.5 rounded-md bg-muted font-mono text-xs sm:text-sm break-words" {...props}>
                   {children}
                 </code>
               ) : (
-                <pre className="mt-3 mb-3 p-3 rounded-lg bg-muted overflow-x-auto">
-                  <code className="block font-mono text-sm" {...props}>
+                <pre className="mt-2 sm:mt-3 mb-2 sm:mb-3 p-2 sm:p-3 rounded-lg bg-muted overflow-x-auto">
+                  <code className="block font-mono text-xs sm:text-sm" {...props}>
                     {children}
                   </code>
                 </pre>
               );
             },
             
-            // Blockquotes
             blockquote: ({ node, ...props }) => (
-              <blockquote
-                {...props}
-                className="mt-3 mb-3 border-l-4 border-primary pl-4 italic"
-              />
+              <blockquote {...props} className="mt-2 sm:mt-3 mb-2 sm:mb-3 border-l-4 border-primary pl-3 sm:pl-4 italic" />
             ),
             
-            // Horizontal rules
             hr: ({ node, ...props }) => (
-              <hr {...props} className="my-4 border-muted" />
+              <hr {...props} className="my-3 sm:my-4 border-muted" />
             ),
             
-            // Strong and emphasis
             strong: ({ node, ...props }) => (
               <strong {...props} className="font-bold" />
             ),
@@ -244,6 +216,9 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
     error,
   } = useChat();
 
+  const { setIsContactDialogOpen } = useContactDialog();
+
+
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -264,7 +239,6 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
       preventDefault: () => {},
     } as React.FormEvent<HTMLFormElement>;
 
-    // Set the input value
     const inputElement = inputRef.current;
     if (inputElement) {
       inputElement.value = question;
@@ -273,7 +247,6 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
       } as React.ChangeEvent<HTMLInputElement>);
     }
 
-    // Submit the form
     handleSubmit(fakeEvent);
   };
 
@@ -282,18 +255,31 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
   return (
     <div
       className={cn(
-        "fixed bottom-20 left-1/2 -translate-x-1/2 z-50 w-[500px] p-1",
+        "fixed bottom-16 sm:bottom-20 left-0 sm:left-1/2 sm:-translate-x-1/2 z-50 w-full sm:w-[500px]",
         open ? "fixed" : "hidden"
       )}
     >
-      <button onClick={onClose} className="mb-1 ms-auto block">
-        <IoIosCloseCircleOutline
-          size={30}
-          className="rounded-full bg-background"
-        />
-      </button>
-      <div className="flex h-[600px] flex-col rounded border bg-background shadow-xl">
-        <div className="mt-3 h-full overflow-y-auto px-3" ref={scrollRef}>
+      <div className="flex h-[80vh] sm:h-[600px] flex-col rounded-lg border bg-background shadow-xl overflow-hidden">
+        {/* Header section */}
+        <div className="flex items-center justify-between px-3 py-2 border-b">
+          <Button
+            variant="secondary"
+            onClick={() => setIsContactDialogOpen(true)}
+            className="h-8 px-4 text-sm font-medium bg-black text-white hover:bg-white hover:text-black dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+          >
+            Contact
+          </Button>
+          <button 
+            onClick={onClose}
+            className="rounded-md hover:bg-muted p-1 transition-colors"
+            title="Close chat"
+          >
+            <AiOutlineCloseSquare className="w-7 h-7" />
+          </button>
+        </div>
+
+        {/* Chat content */}
+        <div className="mt-0 h-full overflow-y-auto px-2 sm:px-3" ref={scrollRef}>
           {messages.map((message) => (
             <ChatMessage message={message} key={message.id} />
           ))}
@@ -319,32 +305,35 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
             <ChatWelcome onQuestionClick={handleQuestionClick} />
           )}
         </div>
-        <form onSubmit={handleSubmit} className="m-3 flex gap-1">
+
+        {/* Form section */}
+        <form onSubmit={handleSubmit} className="p-2 sm:p-3 flex gap-2 border-t">
           <button
             type="button"
-            className="flex items-center justify-center w-10 flex-none"
+            className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 flex-none hover:bg-muted rounded-md"
             title="Clear chat"
             onClick={() => setMessages([])}
           >
-            <Trash size={24} />
+            <Trash className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
           <input
             value={input}
             onChange={handleInputChange}
             placeholder="Say something..."
-            className="grow border rounded bg-background px-3 py-2"
+            className="grow border rounded-md bg-background px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             ref={inputRef}
           />
           <button
             type="submit"
-            className="flex w-10 flex-none items-center justify-center disabled:opacity-50"
+            className="flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 flex-none hover:bg-muted rounded-md disabled:opacity-50 disabled:hover:bg-transparent"
             disabled={input.length === 0}
             title="Submit message"
           >
-            <SendHorizonal size={24} />
+            <SendHorizonal className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </form>
       </div>
+      <ContactDialog />
     </div>
   );
 }
