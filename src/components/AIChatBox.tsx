@@ -296,11 +296,11 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
           <Button
             variant="secondary"
             onClick={() => setIsContactDialogOpen(true)}
-            className="h-8 px-4 text-sm font-medium bg-black text-white hover:bg-white hover:text-black dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+            className="h-8 px-4 text-sm font-medium bg-black text-white hover:bg-white hover:text-black dark:bg-white dark:text-black dark:hover:bg-black dark:hover:text-white transition-colors"
           >
             Contact
           </Button>
-          <button
+          <button 
             onClick={onClose}
             className="rounded-md hover:bg-muted p-1 transition-colors"
             title="Close chat"
