@@ -9,7 +9,7 @@ const createIcon = (Icon: any, className = "size-3") => {
 export const DATA = {
   name: "Olu Kareem",
   initials: "OK",
-  url: "https://www.google.com",
+  url: "https://www.olukareem.me",
   location: "Brooklyn, New York",
   locationLink: "https://www.google.com/maps/place/brooklyn",
   tagline: "Full Stack Developer | Web & Mobile",
@@ -18,6 +18,66 @@ export const DATA = {
   summary:
     "I started in the music scene, but as I got into tech, I found a new creative outlet through coding. Beginning as an intern at Splice, I soon became a software engineer, working on tools for musicians and creators—including a desktop sample library built with TypeScript and Angular, and a mobile music app using Dart and Flutter. Now, as a freelance developer specializing in React and TypeScript, I'm focused on building unique tools and collaborating with businesses and creatives to bring their visions to life. I’m constantly learning and staying on top of the latest tech. Let’s connect and make something great together.",
   avatarUrl: "/images/DSC00796~3.png",
+  personalPhilosophy:
+    "Act before you're ready, focus on consistent growth, and always seek balance.",
+  ethnicBackground: "I'm Nigerian-Jamaican American",
+  valuesAndBeliefs:
+    "Authenticity and resilience define my journey. I value community, creative freedom, and creating meaningful change. I believe in making the most of life’s challenges, growing from them, and helping others where possible.",
+  funFacts: [
+    {
+      funfact1:
+        "Started rapping and gained fame young, but moved into tech for stability.",
+    },
+    {
+      funfact2:
+        "I've lived in Brooklyn, Lisbon, Oakland California, Cleveland Ohio and Chiang Mai, traveling the world as a digital nomad.",
+    },
+  ],
+  softSkills:
+    "Creative problem-solving, adaptability, resilience empathy, cultural awareness, strong communication, and a collaborative mindset.",
+  challengesOvercome: [
+    {
+      challenge:
+        "Balancing my love for music with the need for financial stability",
+      outcome: "Found a way to support my music by freelancing in tech",
+    },
+  ],
+  goals: [
+    {
+      shortTerm:
+        "Build a strong foundation in freelance software development by completing a portfolio of high-quality, interactive projects, including a personal website, e-commerce platform, and AI-integrated applications. Establish a steady client base that allows me to refine my skills in React, TypeScript, and Next.js while delivering impactful solutions for businesses.",
+      longTerm:
+        "Achieve financial independence through a successful career in software engineering, with a focus on innovative projects that bridge creativity and technology. Transition toward building tools and platforms that support the music and creative industries, integrating my technical expertise with my passion for art and storytelling.",
+    },
+  ],
+  favoriteBooks: [
+    {
+      book1: "The Creative Act by Rick Rubin",
+      book2: "Think and Grow Rich by Napoleon Hill",
+      book3: "Meditations by Marcus Aurelius",
+    },
+  ],
+  favoriteMusic:
+    "Kendrick Lamar, Madlib, MF DOOM, Madlib, Toro Y Moi, Kanye West, Outkast, Michael Jackson, Sade, Dean Blunt, Yves Tumor, Mixtape Lil Wayne, and Ka.",
+  favoriteDestinations: [
+    {
+      destination1:
+        "Brooklyn, NY – the place where I experienced the most personal and creative growth",
+      destination2:
+        "Lisbon, Portugal – where I fell in love with travel, enjoying the locals, vibe, and scenery",
+      destination3:
+        "Chiang Mai, Thailand – for its affordable, peaceful environment and digital nomad community",
+    },
+  ],
+  favoriteQuotes: [
+    {
+      quote1: "Start before you're ready",
+      quote2: "The pain you feel today will be the strength you feel tomorrow.",
+      quote3: "The best way to predict the future is to create it.",
+    },
+  ],
+  interests:
+    "Music production and sound design, coding and software development, travel, photography and videography, fitness and health, philosophy, exploring avant-garde design.",
   skills: [
     /* General Skills: */
     { name: "Full-Stack Development" },
