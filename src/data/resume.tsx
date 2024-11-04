@@ -32,6 +32,10 @@ export const DATA = {
       funfact2:
         "I've lived in Brooklyn, Lisbon, Oakland California, Cleveland Ohio and Chiang Mai, traveling the world as a digital nomad.",
     },
+    {
+      funfact3:
+        "In the 2010s I released multiple rap mixtapes and musical content under the names Olu and Olukara. I put out my most recent album, It Wasn't That Deep, in 2024 under the alias, Glolorun.",
+    },
   ],
   softSkills:
     "Creative problem-solving, adaptability, resilience empathy, cultural awareness, strong communication, and a collaborative mindset.",
@@ -452,7 +456,7 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Otion",
+      title: "Otion (Work in progress)",
       href: "/",
       dates: "2024",
       active: true,

@@ -2,7 +2,10 @@
 const nextConfig = {
   images: {
     domains: ['pub-83c5db439b40468498f97946200806f7.r2.dev'],
-    unoptimized: true
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   reactStrictMode: true,
   webpack(config) {
@@ -22,8 +25,21 @@ const nextConfig = {
       allowedOrigins: ["*"],
     },
     scrollRestoration: true,
+    optimizeCss: true,
+    optimizePackageImports: ['lucide-react', '@radix-ui/react-icons', 'framer-motion'],
+    turbo: {
+      loaders: {
+        '.svg': ['@svgr/webpack'],
+      },
+    },
   },
-  output: 'standalone'
+  output: 'standalone',
+  poweredByHeader: false,
+  compress: true,
+  generateEtags: true,
+  httpAgentOptions: {
+    keepAlive: true,
+  },
 };
 
-export default nextConfig;
+export default nextConfig

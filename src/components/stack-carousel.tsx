@@ -158,14 +158,45 @@ const StackCarousel: React.FC = () => {
     // { title: "Media Tools", data: DATA.mediaTools },
   ];
 
+  const [visibleSections, setVisibleSections] = useState<number[]>([0]);
+
+  const observerRef = useRef<IntersectionObserver>();
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(
+              entry.target.getAttribute("data-index") || "0"
+            );
+            setVisibleSections((prev) => [...new Set([...prev, index])]);
+          }
+        });
+      },
+      { rootMargin: "100px" }
+    );
+
+    sectionRefs.current.forEach((ref, index) => {
+      if (ref) observerRef.current?.observe(ref);
+    });
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  const setSectionRef = (index: number) => (element: HTMLDivElement | null) => {
+    sectionRefs.current[index] = element;
+  };
+
   return (
     <>
       {sections.map((section, index) => (
-        <CarouselSection
-          key={index}
-          title={section.title}
-          data={section.data}
-        />
+        <div key={index} ref={setSectionRef(index)} data-index={index}>
+          {visibleSections.includes(index) && (
+            <CarouselSection title={section.title} data={section.data} />
+          )}
+        </div>
       ))}
     </>
   );

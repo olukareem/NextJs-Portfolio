@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { ContactDialogProvider } from "@/contexts/contact-dialog-context";
@@ -12,6 +12,9 @@ const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
+  preload: true,
+  weight: ['400', '500', '600', '700'],
+  fallback: ['system-ui', 'arial'],
 });
 
 export const metadata: Metadata = {
@@ -50,6 +53,16 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fbf7f5" },
+    { media: "(prefers-color-scheme: dark)", color: "#000000" }
+  ],
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,11 +95,10 @@ export default function RootLayout({
         )}
         suppressHydrationWarning
       >
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <TooltipProvider delayDuration={0}>
             <ContactDialogProvider>
               {children}
-
               <Navbar />
             </ContactDialogProvider>
           </TooltipProvider>

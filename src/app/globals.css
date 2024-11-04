@@ -142,3 +142,29 @@ code[data-line-numbers-max-digits="2"] > [data-line]::before {
 code[data-line-numbers-max-digits="3"] > [data-line]::before {
   width: 3rem;
 }
+@layer utilities {
+  .delay-0 {
+    animation-delay: 0ms;
+  }
+  .delay-150 {
+    animation-delay: 150ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  @keyframes customPulse {
+    0%, 100% {
+      opacity: 0.2;
+      transform: scale(0.8);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .animate-pulse {
+    animation: customPulse 3.0s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+}
