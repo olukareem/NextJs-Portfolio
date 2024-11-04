@@ -13,8 +13,8 @@ const fontSans = FontSans({
   variable: "--font-sans",
   display: "swap",
   preload: true,
-  weight: ['400', '500', '600', '700'],
-  fallback: ['system-ui', 'arial'],
+  weight: ["400", "500", "600", "700"],
+  fallback: ["system-ui", "arial"],
 });
 
 export const metadata: Metadata = {
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#fbf7f5" },
-    { media: "(prefers-color-scheme: dark)", color: "#000000" }
+    { media: "(prefers-color-scheme: dark)", color: "#000000" },
   ],
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
@@ -71,8 +71,20 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta
+          name="description"
+          content="Full Stack Developer | Web & Mobile"
+        />
+        <meta property="og:title" content="Olu Kareem" />
+        <meta
+          property="og:description"
+          content="I like to build modern, user-friendly web apps."
+        />
+        <meta property="og:image" content="/images/DSC00796~3.png" />
         <meta name="grammarly-disable" content="true" />
         <meta name="grammarly-disable-features" content="all" />
+        <meta property="og:url" content="https://olukareem.me" />
+
         <link
           rel="icon"
           type="image/png"
