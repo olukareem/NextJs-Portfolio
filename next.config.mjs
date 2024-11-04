@@ -1,11 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["pub-83c5db439b40468498f97946200806f7.r2.dev"],
-    formats: ["image/avif", "image/webp"],
+    formats: ['image/avif', 'image/webp'],
     minimumCacheTTL: 60,
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-    imageSizes: [16, 32, 48, 64, 96, 128],
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
@@ -29,17 +26,19 @@ const nextConfig = {
     scrollRestoration: true,
     turbo: {
       rules: {
-        "*.svg": ["@svgr/webpack"],
+        '*.svg': ['@svgr/webpack'],
       },
     },
   },
-  output: "standalone",
+  optimizeFonts: true,
+  swcMinify: true,
+  output: 'standalone',
   poweredByHeader: false,
   compress: true,
   generateEtags: true,
   httpAgentOptions: {
     keepAlive: true,
   },
+  productionBrowserSourceMaps: false,
 };
-
 export default nextConfig;
