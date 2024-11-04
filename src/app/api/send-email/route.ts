@@ -12,12 +12,13 @@ const ses = new SESClient({
 
 export async function POST(req: Request) {
   try {
-    const { senderEmail, subject, message } = await req.json();
+    const { senderName, senderEmail, subject, message } = await req.json();
 
-    const params = {
-      Source: process.env.VERIFIED_SENDER_EMAIL!,
+    // Send the original message to your own email
+    const paramsForOwner = {
+      Source: `${senderName} <${process.env.VERIFIED_SENDER_EMAIL!}>`,
       Destination: {
-        ToAddresses: ["olukareem@pm.me"], 
+        ToAddresses: ["olukareem@pm.me"],
       },
       Message: {
         Subject: {
@@ -25,10 +26,10 @@ export async function POST(req: Request) {
         },
         Body: {
           Text: {
-            Data: `From: ${senderEmail}\n\nMessage: ${message}`,
+            Data: `From: ${senderName} <${senderEmail}>\n\nMessage: ${message}`,
           },
           Html: {
-            Data: `<strong>From:</strong> ${senderEmail}<br><br><strong>Message:</strong><br>${message.replace(
+            Data: `<strong>From:</strong> ${senderName} &lt;${senderEmail}&gt;<br><br><strong>Message:</strong><br>${message.replace(
               /\n/g,
               "<br>"
             )}`,
@@ -38,8 +39,33 @@ export async function POST(req: Request) {
       ReplyToAddresses: [senderEmail],
     };
 
-    const command = new SendEmailCommand(params);
-    await ses.send(command);
+    const commandForOwner = new SendEmailCommand(paramsForOwner);
+    await ses.send(commandForOwner);
+
+    // Send thank you email to the sender
+    const paramsForSender = {
+      Source: `"Olu Kareem" <${process.env.VERIFIED_SENDER_EMAIL!}>`,
+
+      Destination: {
+        ToAddresses: [senderEmail],
+      },
+      Message: {
+        Subject: {
+          Data: "Thank you for reaching out!",
+        },
+        Body: {
+          Text: {
+            Data: `Hi,\n\nThank you for getting in touch. I appreciate you reaching out, and I'll get back to you as soon as possible.\n\nBest,\nOlu Kareem`,
+          },
+          Html: {
+            Data: `<p>Hi,</p><p>Thank you for getting in touch. I appreciate you reaching out, and I'll get back to you as soon as possible.</p><p>Best,<br>Olu Kareem</p>`,
+          },
+        },
+      },
+    };
+
+    const commandForSender = new SendEmailCommand(paramsForSender);
+    await ses.send(commandForSender);
 
     return NextResponse.json({ success: true });
   } catch (error) {

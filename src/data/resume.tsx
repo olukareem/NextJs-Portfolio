@@ -13,8 +13,7 @@ export const DATA = {
   location: "Brooklyn, New York",
   locationLink: "https://www.google.com/maps/place/brooklyn",
   tagline: "Full Stack Developer | Web & Mobile",
-  description:
-    "I like to build modern, user-friendly web apps and I love hip hop.",
+  description: "I like to build modern, user-friendly web apps.",
   summary:
     "I started in the music scene, but as I got into tech, I found a new creative outlet through coding. Beginning as an intern at Splice, I soon became a software engineer, working on tools for musicians and creators—including a desktop sample library built with TypeScript and Angular, and a mobile music app using Dart and Flutter. Now, as a freelance developer specializing in React and TypeScript, I'm focused on building unique tools and collaborating with businesses and creatives to bring their visions to life. I’m constantly learning and staying on top of the latest tech. Let’s connect and make something great together.",
   avatarUrl: "/images/DSC00796~3.png",
@@ -388,7 +387,7 @@ export const DATA = {
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/in/oloka/",
+        url: "https://www.linkedin.com/in/olukareem",
         icon: Icons.linkedin,
 
         navbar: true,
@@ -466,13 +465,12 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://chatcollect.com",
+          href: "",
           icon: createIcon(Icons.globe),
         },
       ],
       image: "",
-      video:
-        "",
+      video: "",
     },
     {
       title: "Splice Mobile",

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    formats: ['image/avif', 'image/webp'],
+    formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -26,13 +26,13 @@ const nextConfig = {
     scrollRestoration: true,
     turbo: {
       rules: {
-        '*.svg': ['@svgr/webpack'],
+        "*.svg": ["@svgr/webpack"],
       },
     },
   },
-  optimizeFonts: true,
-  swcMinify: true,
-  output: 'standalone',
+  // optimizeFonts: true,
+  // swcMinify: true,
+  output: "standalone",
   poweredByHeader: false,
   compress: true,
   generateEtags: true,

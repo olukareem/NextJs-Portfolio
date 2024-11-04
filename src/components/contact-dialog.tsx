@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription
+  DialogDescription,
 } from "./ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,7 @@ import BlurFade from "./ui/blur-fade";
 
 const ContactDialog: React.FC = () => {
   const { isContactDialogOpen, setIsContactDialogOpen } = useContactDialog();
+  const [senderName, setSenderName] = useState("");
   const [senderEmail, setSenderEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
@@ -22,6 +23,11 @@ const ContactDialog: React.FC = () => {
   const [submitStatus, setSubmitStatus] = useState<"success" | "error" | null>(
     null
   );
+  const [isEditable, setIsEditable] = useState(false);
+
+  const handleInputClick = () => {
+    setIsEditable(true);
+  };
 
   const BLUR_FADE_DELAY = 0.1;
 
@@ -34,11 +40,12 @@ const ContactDialog: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ senderEmail, subject, message }),
+        body: JSON.stringify({ senderName, senderEmail, subject, message }),
       });
       const data = await response.json();
       if (data.success) {
         setSubmitStatus("success");
+        setSenderName("");
         setSenderEmail("");
         setSubject("");
         setMessage("");
@@ -53,10 +60,22 @@ const ContactDialog: React.FC = () => {
   };
 
   return (
-    <Dialog open={isContactDialogOpen} onOpenChange={setIsContactDialogOpen}>
+    <Dialog
+      open={isContactDialogOpen}
+      onOpenChange={(isOpen) => {
+        if (!isOpen) {
+          // Resetting form state to prevent validation messages when closing
+          setSenderEmail("");
+          setSubject("");
+          setMessage("");
+        }
+        setIsContactDialogOpen(isOpen);
+      }}
+    >
+      {" "}
       <DialogContent className="sm:max-w-[425px]">
         <BlurFade delay={BLUR_FADE_DELAY}>
-         {/* <img
+          {/* <img
               src="/images/DSC00815.png"
               alt="Contact banner"
               className="h-40 object-cover mb-6 rounded-lg"
@@ -66,14 +85,26 @@ const ContactDialog: React.FC = () => {
               Send me a message
             </DialogTitle>
             <DialogDescription>
-              It will be sent to olukareem@pm.me via Amazon SES.
+              It will be sent directly to olukareem@pm.me.
             </DialogDescription>
           </DialogHeader>
-          
+
           <form onSubmit={handleSubmit} className="space-y-4 mt-4">
             <div className="space-y-4">
               <Input
+                type="text"
+                readOnly={!isEditable}
+                onClick={handleInputClick}
+                placeholder="Your name"
+                value={senderName}
+                onChange={(e) => setSenderName(e.target.value)}
+                required
+                aria-label="Your name"
+              />
+              <Input
                 type="email"
+                readOnly={!isEditable}
+                onClick={handleInputClick}
                 placeholder="Your email"
                 value={senderEmail}
                 onChange={(e) => setSenderEmail(e.target.value)}
@@ -82,6 +113,8 @@ const ContactDialog: React.FC = () => {
               />
               <Input
                 type="text"
+                readOnly={!isEditable}
+                onClick={handleInputClick}
                 placeholder="Subject"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
@@ -97,7 +130,7 @@ const ContactDialog: React.FC = () => {
                 aria-label="Your message content"
               />
             </div>
-            
+
             <div className="space-y-2">
               <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? "Sending..." : "Send Message"}
