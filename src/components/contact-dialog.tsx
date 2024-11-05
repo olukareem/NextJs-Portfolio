@@ -135,13 +135,13 @@ const ContactDialog: React.FC = () => {
               <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
-              <Button
+              {/* <Button
                 className="w-full"
                 variant="outline"
                 onClick={() => setIsContactDialogOpen(false)}
               >
                 Close
-              </Button>
+              </Button> */}
             </div>
 
             {submitStatus === "success" && (
