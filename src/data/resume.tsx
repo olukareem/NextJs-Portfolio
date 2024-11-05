@@ -34,6 +34,7 @@ export const DATA = {
     {
       funfact3:
         "In the 2010s I released multiple rap mixtapes and musical content under the names Olu and Olukara. I put out my most recent album, It Wasn't That Deep, in 2024 under the alias, Glolorun.",
+      musicLink: "https://glolorun.com/",
     },
   ],
   softSkills:
@@ -456,21 +457,29 @@ export const DATA = {
   projects: [
     {
       title: "Otion (Work in progress)",
-      href: "/",
+      href: "https://otion-seven.vercel.app/",
       dates: "2024",
       active: true,
       description:
         "Otion is a Notion-style document editor with real-time database capabilities, featuring infinite nested documents, file management, and a fully responsive design. The app includes dark/light modes, authentication, file uploads with trash/recovery features, and the ability to publish notes to the web.",
-      technologies: ["Next.js", "React", "Convex", "Tailwind", "Shadcn UI"],
+      technologies: [
+        "Next.js",
+        "React",
+        "Convex",
+        "Tailwind",
+        "Shadcn UI",
+        "Clerk",
+      ],
       links: [
         {
           type: "Website",
-          href: "",
+          href: "https://otion-seven.vercel.app/",
           icon: createIcon(Icons.globe),
         },
       ],
-      image: "",
-      video: "",
+      // image: "/images/otion_sc.png",
+      video:
+        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/e17b2af24f617b94feb55e413c16f501/manifest/video.m3u8",
     },
     {
       title: "Splice Mobile",
