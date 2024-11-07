@@ -45,6 +45,18 @@ export const DATA = {
         "Balancing my love for music with the need for financial stability",
       outcome: "Found a way to support my music by freelancing in tech",
     },
+    {
+      challenge:
+        "Quickly adapting to new technologies and environments. During a restructuring at Splice, I switched teams and took on a new tech stack, moving from desktop applications to mobile development. I went from a team of 12 engineers to a small team of 3, requiring a fast transition and a broader range of responsibilities.",
+      outcome:
+        "This experience taught me resilience and adaptability, while expanding my skillset. I was tested consistently but emerged more versatile and capable in both desktop and mobile development.",
+    },
+    {
+      challenge:
+        "Managing constant change and meeting tight deadlines while navigating the unique challenges of ADHD. Staying organized and focused in a fast-paced environment required extra discipline and strategy.",
+      outcome:
+        "This experience strengthened my ability to prioritize, adapt quickly, and meet deadlines consistently, teaching me valuable techniques for overcoming personal challenges while maintaining high productivity.",
+    },
   ],
   goals: [
     {

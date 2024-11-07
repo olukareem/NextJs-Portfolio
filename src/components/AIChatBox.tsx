@@ -242,7 +242,7 @@ const ChatWelcome = memo(
     ];
 
     return (
-      <div className="flex flex-col h-full items-center justify-center gap-4 text-center mx-2 sm:mx-8">
+      <div className="flex flex-col min-h-[400px] sm:min-h-full items-center justify-center gap-4 text-center mx-2 sm:mx-8 pt-8 sm:pt-0">
         <div className="relative">
           <BsRobot size={32} className="text-primary" />
           <span className="absolute bottom-0 right-0 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
