@@ -39,6 +39,14 @@ export const DATA = {
   ],
   softSkills:
     "Creative problem-solving, adaptability, resilience empathy, cultural awareness, strong communication, and a collaborative mindset.",
+  teamExperience1:
+    "At Splice, I had the opportunity to work closely with experienced mentors who were instrumental in my growth as an engineer. I contributed to code reviews, retrospectives, and daily stand-ups where I kept the team updated on my progress, asked questions, and ensured clarity on task requirements. I took ownership of key tasks, from bug fixes to frontend development, and collaborated directly with UI/UX and product designers to improve performance and usability. This experience strengthened my communication skills and solidified my commitment to producing quality work through teamwork and continuous learning.",
+  teamExperience2:
+    "At General Assembly’s Full Stack Software Engineering Bootcamp, I collaborated closely with my cohort on various full-stack projects, including a sports reference database, a weather app, and a recipe search tool. Through daily stand-ups, code reviews, and Agile teamwork, I built strong technical foundations while learning to communicate effectively, support team goals, and solve problems collaboratively in a fast-paced environment.",
+  myApproach:
+    "My approach to problem-solving is grounded in clarity and strategy. I start by breaking down the problem into smaller, manageable parts and identifying any gaps in my understanding. I research solutions and consider different angles, often discussing ideas with teammates to gain new perspectives. From there, I create a step-by-step plan, prioritizing tasks to address the core issues first. If a solution doesn’t work, I reassess, iterate, and adjust until I reach a solid outcome. I see each challenge as a chance to think creatively, test new methods, and ultimately learn from the process.",
+  howIHandleFailure:
+    "I approach failure as a stepping stone for growth. When things don’t go as planned, I take time to analyze what went wrong and identify specific areas for improvement. I actively seek feedback, adjust my approach, and apply what I've learned to future challenges. For me, failure is a chance to sharpen my resilience, improve my skills, and come back stronger, which has been key to my personal and professional growth.",
   challengesOvercome: [
     {
       challenge:
