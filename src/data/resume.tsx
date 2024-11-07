@@ -483,6 +483,11 @@ export const DATA = {
       description:
         "Otion is a Notion-style document editor with real-time database capabilities, featuring infinite nested documents, file management, and a fully responsive design. The app includes dark/light modes, authentication, file uploads with trash/recovery features, and the ability to publish notes to the web.",
       technologies: [
+        "Fullstack Development",
+        "Database Management",
+        "API Management",
+        "Authentication",
+        "Responsive Design",
         "Typescript",
         "Next.js",
         "React",
@@ -510,15 +515,20 @@ export const DATA = {
       description:
         "Splice Mobile is a comprehensive music production app that enables users to create multi-layered compositions using samples, presets, MIDI, and creative tools from the Splice catalog. I developed front-end components and purchase asset flows for CoSo, an AI-assisted music creation platform, maintained both front-end and back-end using Dart and GraphQL, contributed to the unification of CoSo and Splice Mobile into a single app, and implemented analytics tracking using Segment.",
       technologies: [
+        "Cross-Platform Mobile Development",
+        "Fullstack Development",
         "Flutter",
         "Dart",
         "Android Studio",
         "XCode",
         "GraphQl",
         "Figma",
-        "Segment",
-        "LaunchDarkly",
-        "Braze",
+        "Analytic Tracking",
+        "Feature Management",
+        "Component Library Management",
+        "API Management",
+        "Customer Engagement",
+        "Authentication",
       ],
       links: [
         {
@@ -549,6 +559,8 @@ export const DATA = {
       description:
         "Splice Bridge is a specialized plugin that seamlessly integrates with your DAW to preview Splice samples in real-time, automatically matching them to your project's tempo and key. I developed the transpose component for key and BPM adjustments, created front-end coachmark and toast components, implemented the 'Copy to DAW' feature, and worked on the Bridge companion app with direct DAW integration.",
       technologies: [
+        "Front-End Development",
+        "Component Library Management",
         "Typescript",
         "Angular",
         "Node.js",
@@ -576,6 +588,8 @@ export const DATA = {
       description:
         "Splice Desktop is a central hub for music production that provides access to millions of royalty-free sounds, loops, FX, MIDI, and presets with direct DAW integration. I developed front-end components using Angular and TypeScript, managed the component library with Storybook.js, and implemented asset management features including library additions, purchases, favorites, and credit spending.",
       technologies: [
+        "Front-End Development",
+        "Component Library Management",
         "Typescript",
         "Angular",
         "Node.js",
