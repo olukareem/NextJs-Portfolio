@@ -483,6 +483,7 @@ export const DATA = {
       description:
         "Otion is a Notion-style document editor with real-time database capabilities, featuring infinite nested documents, file management, and a fully responsive design. The app includes dark/light modes, authentication, file uploads with trash/recovery features, and the ability to publish notes to the web.",
       technologies: [
+        "Typescript",
         "Next.js",
         "React",
         "Convex",
