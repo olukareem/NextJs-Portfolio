@@ -471,7 +471,7 @@ export const DATA = {
       start: "2020",
       end: "2020",
       description:
-        "During my time at General Assembly’s Full Stack Software Engineering Bootcamp, I built a strong foundation in web development by working on a range of full-stack projects. I created a sports reference database using vanilla JavaScript and multiple APIs, built an interactive weather app with React and JavaScript, and developed a full-stack CRUD blogging application with a React frontend and Ruby on Rails backend. I also collaborated with an Agile development team to build a food recipe search app using JavaScript, React, and Mongoose. These projects sharpened my technical skills across front-end and back-end technologies, strengthened my teamwork abilities, and taught me how to approach problem-solving in a fast-paced, real-world environment.",
+        "During my time at the General Assembly Full Stack Software Engineering Bootcamp, I built a strong foundation in web development by working on a range of full-stack projects. I created a sports reference database using vanilla JavaScript and multiple APIs, built an interactive weather app with React and JavaScript, and developed a full-stack CRUD blogging application with a React frontend and Ruby on Rails backend. I also collaborated with an Agile development team to build a food recipe search app using JavaScript, React, and Mongoose. These projects sharpened my technical skills across front-end and back-end technologies, strengthened my teamwork abilities, and taught me how to approach problem-solving in a fast-paced, real-world environment.",
     },
   ],
   projects: [
