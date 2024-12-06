@@ -401,7 +401,7 @@ export const DATA = {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "https://github.com/olutobikareem",
+        url: "https://github.com/olukareem",
         icon: Icons.github,
 
         navbar: true,
