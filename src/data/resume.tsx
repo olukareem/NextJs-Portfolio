@@ -254,6 +254,13 @@ export const DATA = {
       description:
         "I’ve used PostgreSQL for relational database management, handling structured data in web and mobile apps.",
     },
+    {
+      name: "Firebase",
+      imageUrl: "/skill-icons/firebase.svg",
+      description:
+        "I've used Firebase extensively for backend functionality, authentication, real-time database tracking, and analytics dashboards. I integrated Firebase into both the Somna and DSP Desk projects to power user tracking, subscription events, and content performance metrics.",
+    },
+  
     // {
     //   name: "MongoDB",
     //   imageUrl: "/skill-icons/mongodb.svg",
@@ -437,6 +444,18 @@ export const DATA = {
   },
 
   work: [
+    {
+      company: "Somna",
+      href: "https://www.somna.app/",
+      badges: ["Freelance"],
+      location: "Remote",
+      title: "Flutter Engineer & Analytics Developer",
+      logoUrl: "/business-logos/somna.png",
+      start: "2025",
+      end: "Present",
+      description:
+        "At Somna, a sleep wellness app, I led analytics integration and admin dashboard development. Using Firebase, I implemented custom tracking for user engagement, subscription events (trials, conversions, churn), and song/category performance. I also developed a React-based admin dashboard using Next.js and Recharts to visualize key metrics, including trial user counts, subscription trends, and content popularity, with dynamic time filters (7, 30, 90 days).\n\nI’m currently expanding analytics capabilities to include demographic data and SDK integrations (Facebook, TikTok), while also resolving platform-specific issues like Google Sign-In on Android. Ongoing efforts focus on improving data integrity, performance, and dashboard usability, helping the team make more informed product decisions.",
+    },
     {
       company: "Splice",
       href: "https://splice.com/",
