@@ -415,7 +415,7 @@ export const DATA = {
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "https://www.linkedin.com/olukareem",
+        url: "https://www.linkedin.com/in/olukareem/",
         icon: Icons.linkedin,
 
         navbar: true,
@@ -460,7 +460,6 @@ export const DATA = {
       company: "Splice",
       href: "https://splice.com/",
       badges: [],
-      location: "Remote",
       location: "Remote",
       title: "Software Engineer",
       logoUrl: "/business-logos/splice.png",
