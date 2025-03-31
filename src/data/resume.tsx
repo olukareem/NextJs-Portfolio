@@ -447,7 +447,7 @@ export const DATA = {
     {
       company: "Somna",
       href: "https://www.somna.app/",
-      badges: ["Freelance"],
+      badges: [],
       location: "Remote",
       title: "Flutter Engineer & Analytics Developer",
       logoUrl: "/business-logos/somna.png",
@@ -460,6 +460,7 @@ export const DATA = {
       company: "Splice",
       href: "https://splice.com/",
       badges: [],
+      location: "Remote",
       location: "Remote",
       title: "Software Engineer",
       logoUrl: "/business-logos/splice.png",
@@ -495,7 +496,7 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Otion (Work in progress)",
+      title: "Otion",
       href: "https://otion-seven.vercel.app/",
       dates: "2024",
       active: true,
