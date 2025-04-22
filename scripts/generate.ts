@@ -8,12 +8,47 @@ import { TextLoader } from "langchain/document_loaders/fs/text";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 import { getEmbeddingsCollection, getVectorStore } from "../src/lib/astradb";
 
+// Helper to check if we're in build context
+const isBuildTime = () => {
+  return process.env.NODE_ENV === 'production' && 
+         (process.env.VERCEL_ENV === 'production' || process.env.SKIP_DB_CONNECTIONS === 'true');
+};
+
 async function generateEmbeddings() {
-  await Redis.fromEnv().flushdb();
+  // Skip execution during build time
+  if (isBuildTime()) {
+    console.log("Build context detected, skipping embeddings generation");
+    return;
+  }
 
+  try {
+    // Connect to Redis
+    const redis = Redis.fromEnv();
+    await redis.flushdb();
+    console.log("Redis flushed successfully");
+  } catch (error) {
+    console.warn("Failed to flush Redis:", error);
+    // Continue execution even if Redis fails
+  }
+
+  // Get vector store with null check
   const vectorStore = await getVectorStore();
+  if (!vectorStore) {
+    console.error("Failed to initialize vector store, cannot continue");
+    return;
+  }
 
-  (await getEmbeddingsCollection()).deleteMany({});
+  // Get embeddings collection with null check
+  const embedCollection = await getEmbeddingsCollection();
+  if (embedCollection) {
+    try {
+      await embedCollection.deleteMany({});
+      console.log("Cleared existing embeddings collection");
+    } catch (error) {
+      console.warn("Failed to clear embeddings collection:", error);
+      // Continue execution
+    }
+  }
 
   // Load documents from both "src/app/" and "src/data/"
   const appLoader = new DirectoryLoader(
@@ -64,7 +99,21 @@ async function generateEmbeddings() {
 
   const splitter = RecursiveCharacterTextSplitter.fromLanguage("html");
   const splitDocs = await splitter.splitDocuments(docs);
-  await vectorStore.addDocuments(splitDocs);
+  
+  try {
+    await vectorStore.addDocuments(splitDocs);
+    console.log(`Successfully added ${splitDocs.length} documents to vector store`);
+  } catch (error) {
+    console.error("Failed to add documents to vector store:", error);
+  }
 }
 
-generateEmbeddings();
+// Only run if not imported
+if (require.main === module) {
+  generateEmbeddings()
+    .then(() => console.log("Done generating embeddings"))
+    .catch((error) => {
+      console.error("Error generating embeddings:", error);
+      process.exit(1);
+    });
+}
