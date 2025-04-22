@@ -5,14 +5,30 @@ import { Redis } from "@upstash/redis";
 export class UpstashRedisCache extends BaseCache<Generation[]> {
   private client: Redis;
   private ttl?: number;
+  private isConnected: boolean = true;
 
   constructor(fields: { client: Redis; ttl?: number }) {
     super();
     this.client = fields.client;
     this.ttl = fields.ttl;
+    
+    // Test connection and set flag
+    this.testConnection();
+  }
+  
+  private async testConnection() {
+    try {
+      await this.client.ping();
+      this.isConnected = true;
+    } catch (e) {
+      console.warn("Redis connection failed, caching will be disabled:", e);
+      this.isConnected = false;
+    }
   }
 
   public async lookup(prompt: string, llmKey: string): Promise<Generation[] | null> {
+    if (!this.isConnected) return null;
+    
     try {
       const key = this.getCacheKey(prompt, llmKey);
       const value = await this.client.get<string>(key);
@@ -25,6 +41,8 @@ export class UpstashRedisCache extends BaseCache<Generation[]> {
   }
 
   public async update(prompt: string, llmKey: string, value: Generation[]): Promise<void> {
+    if (!this.isConnected) return;
+    
     try {
       const key = this.getCacheKey(prompt, llmKey);
       const serializedValue = JSON.stringify(value);

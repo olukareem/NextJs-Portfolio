@@ -1,9 +1,17 @@
 import { Redis } from '@upstash/redis'
 
-export const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL!,
-  token: process.env.UPSTASH_REDIS_REST_TOKEN!
-})
+// Singleton pattern to ensure Redis is only initialized when needed
+let redisClient: Redis | null = null;
+
+export const getRedisClient = () => {
+  if (!redisClient && process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    redisClient = new Redis({
+      url: process.env.UPSTASH_REDIS_REST_URL,
+      token: process.env.UPSTASH_REDIS_REST_TOKEN
+    })
+  }
+  return redisClient
+}
 
 export const getTodayKey = () => {
   const date = new Date()

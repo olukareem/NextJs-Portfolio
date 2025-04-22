@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { redis, getTodayKey, getIPAddress, isTestTraffic } from "@/lib/tracking"
+import { getRedisClient, getTodayKey, getIPAddress, isTestTraffic } from "@/lib/tracking"
 
 export async function POST(req: Request) {
   try {
@@ -14,6 +14,13 @@ export async function POST(req: Request) {
     const excludedIPs = (process.env.EXCLUDED_IPS || '').split(',')
     if (excludedIPs.includes(ip)) {
       return NextResponse.json({ success: true, skipped: true })
+    }
+
+    // Get Redis client
+    const redis = getRedisClient()
+    if (!redis) {
+      console.warn("Redis client not available, skipping tracking")
+      return NextResponse.json({ success: true, skipped: true, reason: "redis_unavailable" })
     }
 
     const today = getTodayKey()
