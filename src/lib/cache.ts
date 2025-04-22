@@ -3,23 +3,27 @@ import { Generation } from "@langchain/core/outputs";
 import { Redis } from "@upstash/redis";
 
 export class UpstashRedisCache extends BaseCache<Generation[]> {
-  private client: Redis;
+  private client: Redis | null;
   private ttl?: number;
-  private isConnected: boolean = true;
+  private isConnected: boolean = false;
 
-  constructor(fields: { client: Redis; ttl?: number }) {
+  constructor(fields: { client: Redis | null; ttl?: number }) {
     super();
     this.client = fields.client;
     this.ttl = fields.ttl;
     
-    // Test connection and set flag
-    this.testConnection();
+    // Test connection if client is provided
+    if (this.client) {
+      this.testConnection();
+    }
   }
   
   private async testConnection() {
     try {
-      await this.client.ping();
-      this.isConnected = true;
+      if (this.client) {
+        await this.client.ping();
+        this.isConnected = true;
+      }
     } catch (e) {
       console.warn("Redis connection failed, caching will be disabled:", e);
       this.isConnected = false;
@@ -27,7 +31,7 @@ export class UpstashRedisCache extends BaseCache<Generation[]> {
   }
 
   public async lookup(prompt: string, llmKey: string): Promise<Generation[] | null> {
-    if (!this.isConnected) return null;
+    if (!this.client || !this.isConnected) return null;
     
     try {
       const key = this.getCacheKey(prompt, llmKey);
@@ -41,7 +45,7 @@ export class UpstashRedisCache extends BaseCache<Generation[]> {
   }
 
   public async update(prompt: string, llmKey: string, value: Generation[]): Promise<void> {
-    if (!this.isConnected) return;
+    if (!this.client || !this.isConnected) return;
     
     try {
       const key = this.getCacheKey(prompt, llmKey);

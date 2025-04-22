@@ -32,9 +32,18 @@ export async function POST(req: Request) {
 
     const currentMessageContent = messages[messages.length - 1].content;
 
-    const cache = new UpstashRedisCache({
-      client: Redis.fromEnv(),
-    });
+    // Initialize Redis with error handling
+    let redisClient;
+    try {
+      redisClient = Redis.fromEnv();
+    } catch (error) {
+      console.warn("Failed to initialize Redis client:", error);
+      redisClient = null;
+    }
+
+    const cache = redisClient ? new UpstashRedisCache({
+      client: redisClient,
+    }) : undefined;
 
     const { stream, handlers } = LangChainStream();
 
@@ -52,7 +61,17 @@ export async function POST(req: Request) {
       cache,
     });
 
-    const retriever = (await getVectorStore()).asRetriever();
+    // Get vector store with null check
+    const vectorStore = await getVectorStore();
+    if (!vectorStore) {
+      console.error("Failed to initialize vector store");
+      return Response.json(
+        { error: "Failed to initialize search functionality" },
+        { status: 500 }
+      );
+    }
+
+    const retriever = vectorStore.asRetriever();
 
     const rephrasePrompt = ChatPromptTemplate.fromMessages([
       new MessagesPlaceholder("chat_history"),

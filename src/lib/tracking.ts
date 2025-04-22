@@ -3,14 +3,42 @@ import { Redis } from '@upstash/redis'
 // Singleton pattern to ensure Redis is only initialized when needed
 let redisClient: Redis | null = null;
 
-export const getRedisClient = () => {
-  if (!redisClient && process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
-    redisClient = new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN
-    })
+// For backward compatibility - lazily initialized redis instance
+// This is needed because some files might still be importing 'redis' directly
+export const redis = new Proxy({} as Redis, {
+  get: (target, prop) => {
+    const client = getRedisClient();
+    if (!client) {
+      console.warn(`Redis client not initialized but '${String(prop)}' was accessed`);
+      // Return a no-op function to prevent crashes
+      return typeof prop === 'string' && ['incr', 'sadd', 'get', 'set', 'exists', 'del'].includes(prop) 
+        ? async () => null 
+        : null;
+    }
+    return client[prop as keyof Redis];
   }
-  return redisClient
+});
+
+export const getRedisClient = () => {
+  // Skip during build time
+  if (typeof process !== 'undefined' && 
+      process.env.NODE_ENV === 'production' && 
+      (process.env.VERCEL_ENV === 'production' || process.env.SKIP_DB_CONNECTIONS === 'true')) {
+    return null;
+  }
+  
+  if (!redisClient && process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN) {
+    try {
+      redisClient = new Redis({
+        url: process.env.UPSTASH_REDIS_REST_URL,
+        token: process.env.UPSTASH_REDIS_REST_TOKEN
+      });
+    } catch (error) {
+      console.error("Failed to initialize Redis client:", error);
+      return null;
+    }
+  }
+  return redisClient;
 }
 
 export const getTodayKey = () => {
