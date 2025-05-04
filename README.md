@@ -35,3 +35,14 @@ The live site is automatically deployed to Vercel on every push—so the code yo
 `OpenAI / LangChain` for AI‑powered features
 
 I’m comfortable owning the full lifecycle—from Figma hand‑off to CI/CD and post‑launch iterations.
+
+## Let’s talk
+If you’re looking for an engineer who can design, build, and ship end‑to‑end products, reach out:
+
+Email: olukareem@pm.me
+
+LinkedIn: https://linkedin.com/in/olukareem
+
+Website: https://www.olukareem.me
+
+Thanks for stopping by—looking forward to building something great together.
