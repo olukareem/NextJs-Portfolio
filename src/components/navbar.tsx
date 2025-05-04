@@ -49,7 +49,7 @@ export default function Navbar() {
             </TooltipContent>
           </Tooltip>
         </DockIcon>
-        <DockIcon>
+        {/* <DockIcon>
           <Tooltip>
             <TooltipTrigger asChild>
               <Button
@@ -66,7 +66,7 @@ export default function Navbar() {
             </TooltipContent>
           </Tooltip>
           <AIChatBox open={chatBoxOpen} onClose={() => setChatBoxOpen(false)} />
-        </DockIcon>
+        </DockIcon> */}
         <Separator orientation="vertical" className="h-full py-2" />
         {DATA.navbar.map((item) => (
           <DockIcon key={item.href}>
