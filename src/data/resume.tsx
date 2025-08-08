@@ -260,7 +260,7 @@ export const DATA = {
       description:
         "I've used Firebase extensively for backend functionality, authentication, real-time database tracking, and analytics dashboards. I integrated Firebase into both the Somna and DSP Desk projects to power user tracking, subscription events, and content performance metrics.",
     },
-  
+
     // {
     //   name: "MongoDB",
     //   imageUrl: "/skill-icons/mongodb.svg",
@@ -494,6 +494,48 @@ export const DATA = {
     },
   ],
   projects: [
+    {
+      company: "Somna",
+      href: "https://www.somna.app/",
+      badges: [],
+      location: "Remote",
+      title: "Full Stack Developer & Lead Engineer",
+      logoUrl: "/business-logos/somna.png", // Ensure you have this logo in your public folder
+      start: "2025", // Or the correct start date
+      end: "Present",
+      description:
+        "As the lead engineer for Somna, I took full ownership of the Flutter mobile app, spearheading a complete overhaul of its most critical systems to drive stability, user experience, and monetization. I re-architected the entire in-app purchase (IAP) and subscription logic, resolving high-priority bugs that blocked users from restoring purchases and ensuring full App Store compliance.\n\nMy work also involved a deep dive into the mobile codebase to rebuild the unreliable offline download system from the ground up, and I systematically eliminated dozens of UI/UX bugs across the audio player, navigation, and core user flows. This hands-on mobile development was complemented by the foundational analytics dashboard I initially architected with React, providing the team with robust, actionable data to inform product strategy.",
+    },
+
+    {
+      title: "DSP Desk - Fleet Management App",
+      href: "#", // Add a link to a case study or the live app if available
+      dates: "2025",
+      active: true,
+      description:
+        "As the sole developer, I built the DSP Desk mobile app from the ground up—a full-stack fleet management solution using Flutter and Firebase. My work involved translating Figma designs into a polished, user-friendly interface, implementing real-time data synchronization with Firestore for driver and fleet management, and integrating Firebase Storage for essential file uploads. I focused on creating a reusable component architecture and robust form validation to deliver a reliable and efficient tool for drivers.",
+      technologies: [
+        "Full-Stack Development",
+        "Cross-Platform Mobile Development",
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "Firebase Cloud Firestore",
+        "Firebase Storage",
+        "Google Maps API",
+        "UI/UX Implementation",
+        "Real-Time Database",
+      ],
+      links: [
+        // {
+        //   type: "Website",
+        //   href: "#", // Link to a live site or case study
+        //   icon: createIcon(Icons.globe),
+        // },
+      ],
+      image: "", // Add a path to your project image/screenshot
+      video: "", // Add a path to your project video
+    },
     {
       title: "Otion",
       href: "https://otion-seven.vercel.app/",
