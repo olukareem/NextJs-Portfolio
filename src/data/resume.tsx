@@ -15,7 +15,8 @@ export const DATA = {
   tagline: "Full Stack Developer | Web & Mobile",
   description: "I like to build modern, user-friendly web apps.",
   summary:
-    "I started in the music scene, but as I got into tech, I found a new creative outlet through coding. Beginning as an intern at Splice, I soon became a software engineer, working on tools for musicians and creators—including a desktop sample library built with TypeScript and Angular, and a mobile music app using Dart and Flutter. Now, as a freelance developer specializing in React and TypeScript, I'm focused on building unique tools and collaborating with businesses and creatives to bring their visions to life. I’m constantly learning and staying on top of the latest tech. Let’s connect and make something great together.",
+    "I began my engineering career at Splice, advancing from intern to full-time Software Engineer. During my tenure, I built complex desktop and mobile applications using TypeScript, Angular, Dart, and Flutter. Currently, I am a freelance developer specializing in cross-platform mobile development with Flutter, alongside modern web development using React and TypeScript. I partner with businesses to deliver scalable, high-performance applications, prioritizing clean architecture and technical precision.",
+
   avatarUrl: "/images/DSC00796~3.png",
   personalPhilosophy:
     "Act before you're ready, focus on consistent growth, and always seek balance.",
@@ -103,7 +104,6 @@ export const DATA = {
   interests:
     "Music production and sound design, coding and software development, travel, photography and videography, fitness and health, philosophy, exploring avant-garde design.",
   skills: [
-    /* General Skills: */
     { name: "Full-Stack Development" },
     {
       name: "Cross-Platform Mobile Development",
@@ -129,7 +129,6 @@ export const DATA = {
     { name: "Natural Language Processing" },
   ],
   languages: [
-    /* Core Programming Languages */
     {
       name: "Javascript",
       imageUrl: "/skill-icons/javascript.svg",
@@ -162,7 +161,6 @@ export const DATA = {
     },
   ],
   frameworks: [
-    /* Core Frameworks */
     {
       name: "React",
       imageUrl: "/skill-icons/react.svg",
@@ -205,26 +203,14 @@ export const DATA = {
       description:
         "I've used Langchain to create sophisticated AI applications, implementing features like document retrieval, chat history management, and context-aware responses.",
     },
-    // {
-    //   name: "Electron.js",
-    //   imageUrl: "/skill-icons/electronjs.svg",
-    //   description: "I used Electron.js while maintaining on Splice Desktop.",
-    // },
     {
       name: "Tailwind CSS",
       imageUrl: "/skill-icons/tailwind.svg",
       description:
         "Ive used Tailwind CSS to speed up UI design in personal projects, enabling efficient, utility-first styling.",
     },
-    // {
-    //   name: "Bootstrap",
-    //   imageUrl: "/skill-icons/bootstrap.svg",
-    //   description:
-    //     "I used Bootstrap during my work at Splice, enabling fast prototyping and consistent, responsive layouts across projects.",
-    // },
   ],
   devTools: [
-    /* Developer Tools */
     {
       name: "AWS SES",
       imageUrl: "/skill-icons/aws-ses.svg",
@@ -260,25 +246,6 @@ export const DATA = {
       description:
         "I've used Firebase extensively for backend functionality, authentication, real-time database tracking, and analytics dashboards. I integrated Firebase into both the Somna and DSP Desk projects to power user tracking, subscription events, and content performance metrics.",
     },
-
-    // {
-    //   name: "MongoDB",
-    //   imageUrl: "/skill-icons/mongodb.svg",
-    //   description:
-    //     "I've used MongoDB for NoSQL databases, particularly in projects that require flexible, scalable data structures.",
-    // },
-    // {
-    //   name: "Prisma",
-    //   imageUrl: "/skill-icons/prisma.svg",
-    //   description:
-    //     "Prisma has been my ORM for working with databases on some of my personal projects",
-    // },
-    // {
-    //   name: "Storybook.js",
-    //   imageUrl: "/skill-icons/storybook.svg",
-    //   description:
-    //     "I'm familiar with storybook from my time at Splice, where I contributed to the frontend component library.",
-    // },
     {
       name: "Vercel",
       imageUrl: "/skill-icons/vercel.svg",
@@ -311,7 +278,6 @@ export const DATA = {
     },
   ],
   businessTools: [
-    /* Business Tools */
     {
       name: "Stripe",
       imageUrl: "/skill-icons/stripe.svg",
@@ -364,21 +330,8 @@ export const DATA = {
       description:
         "I've used Figma for collaborative UI/UX design, prototyping, and wireframing with teams.",
     },
-    // {
-    //   name: "Framer",
-    //   imageUrl: "/skill-icons/framer.svg",
-    //   description:
-    //     "Framer helps me create interactive, high-fidelity prototypes to demonstrate design functionality.",
-    // },
-    // {
-    //   name: "Webflow",
-    //   imageUrl: "/skill-icons/webflow.svg",
-    //   description:
-    //     "I've used Webflow for visually designing and building responsive websites with clean, production-ready code.",
-    // },
   ],
   mediaTools: [
-    /* Media Tools */
     {
       name: "Ableton Live",
       imageUrl: "/skill-icons/abletonlive.png",
@@ -399,7 +352,6 @@ export const DATA = {
   ],
   navbar: [
     { href: "/", icon: HomeIcon, label: "Home" },
-    // { href: "/blog", icon: NotebookIcon, label: "Blog" },
     { href: "#projects", icon: CgWebsite, label: "Work" },
   ],
   contact: {
@@ -410,34 +362,18 @@ export const DATA = {
         name: "GitHub",
         url: "https://github.com/olukareem",
         icon: Icons.github,
-
         navbar: true,
       },
       LinkedIn: {
         name: "LinkedIn",
         url: "https://www.linkedin.com/in/olukareem/",
         icon: Icons.linkedin,
-
         navbar: true,
       },
-      // X: {
-      //   name: "X",
-      //   url: "",
-      //   icon: Icons.x,
-
-      //   navbar: true,
-      // },
-      // Youtube: {
-      //   name: "Youtube",
-      //   url: "",
-      //   icon: Icons.youtube,
-      //   navbar: true,
-      // },
       email: {
         name: "Send Email",
         url: "#",
         icon: Icons.email,
-
         navbar: false,
       },
     },
@@ -495,21 +431,33 @@ export const DATA = {
   ],
   projects: [
     {
-      company: "Somna",
+      title: "Somna Mobile App",
       href: "https://www.somna.app/",
-      badges: [],
-      location: "Remote",
-      title: "Full Stack Developer & Lead Engineer",
-      logoUrl: "/business-logos/somna.png", // Ensure you have this logo in your public folder
-      start: "2025", // Or the correct start date
-      end: "Present",
+      dates: "2025 - 2026",
+      active: true,
       description:
         "As the lead engineer for Somna, I took full ownership of the Flutter mobile app, spearheading a complete overhaul of its most critical systems to drive stability, user experience, and monetization. I re-architected the entire in-app purchase (IAP) and subscription logic, resolving high-priority bugs that blocked users from restoring purchases and ensuring full App Store compliance.\n\nMy work also involved a deep dive into the mobile codebase to rebuild the unreliable offline download system from the ground up, and I systematically eliminated dozens of UI/UX bugs across the audio player, navigation, and core user flows. This hands-on mobile development was complemented by the foundational analytics dashboard I initially architected with React, providing the team with robust, actionable data to inform product strategy.",
+      technologies: [
+        "Flutter",
+        "Dart",
+        "React",
+        "Firebase",
+        "In-App Purchases",
+        "Mobile Analytics",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://www.somna.app/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: "",
+      video: "",
     },
-
     {
       title: "DSP Desk - Fleet Management App",
-      href: "#", // Add a link to a case study or the live app if available
+      href: "#",
       dates: "2025",
       active: true,
       description:
@@ -526,15 +474,9 @@ export const DATA = {
         "UI/UX Implementation",
         "Real-Time Database",
       ],
-      links: [
-        // {
-        //   type: "Website",
-        //   href: "#", // Link to a live site or case study
-        //   icon: createIcon(Icons.globe),
-        // },
-      ],
-      image: "", // Add a path to your project image/screenshot
-      video: "", // Add a path to your project video
+      links: [],
+      image: "",
+      video: "",
     },
     {
       title: "Otion",
@@ -564,7 +506,6 @@ export const DATA = {
           icon: createIcon(Icons.globe),
         },
       ],
-      // image: "/images/otion_sc.png",
       video:
         "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/e17b2af24f617b94feb55e413c16f501/manifest/video.m3u8",
     },
