@@ -7,8 +7,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { ContactDialogProvider } from "@/contexts/contact-dialog-context";
-import { useEffect } from 'react';
-
 
 const fontSans = FontSans({
   subsets: ["latin"],
