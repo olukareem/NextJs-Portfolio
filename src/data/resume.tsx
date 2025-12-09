@@ -15,7 +15,7 @@ export const DATA = {
   tagline: "Full Stack Developer | Web & Mobile",
   description: "I like to build modern, user-friendly web apps.",
   summary:
-    "I began my engineering career at Splice, advancing from intern to full-time Software Engineer. During my tenure, I built complex desktop and mobile applications using TypeScript, Angular, Dart, and Flutter. Currently, I am a freelance developer specializing in cross-platform mobile development with Flutter, alongside modern web development using React and TypeScript. I partner with businesses to deliver scalable, high-performance applications, prioritizing clean architecture and technical precision.",
+    "I began my engineering career at Splice, advancing from intern to full-time Software Engineer, building complex desktop and mobile tools. Most recently, I led the engineering overhaul of Somna, where I rescued a legacy Flutter codebase and built a full-stack analytics platform. I currently partner with businesses to deliver scalable, high-performance applications, prioritizing clean architecture and technical precision.",
 
   avatarUrl: "/images/DSC00796~3.png",
   personalPhilosophy:
@@ -385,12 +385,12 @@ export const DATA = {
       href: "https://www.somna.app/",
       badges: [],
       location: "Remote",
-      title: "Flutter Engineer & Analytics Developer",
+      title: "Lead Full Stack Engineer",
       logoUrl: "/business-logos/somna.png",
       start: "2025",
-      end: "Present",
+      end: "2026",
       description:
-        "At Somna, I took on full-stack ownership of the core Flutter mobile app, expanding beyond my initial analytics role to drive deep improvements in stability, performance, and monetization. I led a complete overhaul of the app's most critical systems, including re-architecting the in-app purchase and subscription logic to resolve high-priority bugs that blocked users from restoring purchases and to ensure full App Store compliance.\n\nMy contributions involved a deep dive into the mobile codebase to systematically enhance the user experience. I rebuilt the unreliable offline download system from the ground up, resolving systemic failures in artwork display, playback, and file management. I also eliminated dozens of UI bugs to create a more polished, intuitive interface and modernized the entire build system for the latest Flutter version. This hands-on mobile development was complemented by the foundational analytics dashboard I architected with React and Firebase, which provided the team with robust, actionable data on user lifecycle and engagement to inform product strategy.",
+        "As the lead engineer, I executed a complete technical rescue of the Somna platform. The product lacked data visibility and suffered from critical mobile bugs. I responded by architecting a custom B2B analytics dashboard using React, Next.js, and Firebase, which gave the business its first clear view of user retention and churn.\n\nSimultaneously, I overhauled the Flutter mobile app. I rebuilt the broken offline download system using relative pathing to fix storage failures and re-architected the In-App Purchase flow with RevenueCat to resolve high-priority compliance and revenue issues. I also upgraded the entire stack to the latest Flutter version, ensuring long-term stability.",
     },
     {
       company: "Splice",
@@ -431,19 +431,20 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "Somna Mobile App",
+      title: "Somna Mobile App & Analytics",
       href: "https://www.somna.app/",
-      dates: "2025 - 2026",
+      dates: "2025",
       active: true,
       description:
-        "As the lead engineer for Somna, I took full ownership of the Flutter mobile app, spearheading a complete overhaul of its most critical systems to drive stability, user experience, and monetization. I re-architected the entire in-app purchase (IAP) and subscription logic, resolving high-priority bugs that blocked users from restoring purchases and ensuring full App Store compliance.\n\nMy work also involved a deep dive into the mobile codebase to rebuild the unreliable offline download system from the ground up, and I systematically eliminated dozens of UI/UX bugs across the audio player, navigation, and core user flows. This hands-on mobile development was complemented by the foundational analytics dashboard I initially architected with React, providing the team with robust, actionable data to inform product strategy.",
+        "I took ownership of the Somna product to solve two major problems: instability in the mobile app and a total lack of business data. On the mobile side (Flutter), I rebuilt the offline file management system and fixed a broken subscription model that was preventing users from restoring purchases. On the web side, I architected a full-stack dashboard (Next.js/React) that aggregated user behavior and revenue metrics. This dual-front effort transformed an unstable app into a professional, data-driven platform.",
       technologies: [
         "Flutter",
         "Dart",
         "React",
-        "Firebase",
-        "In-App Purchases",
-        "Mobile Analytics",
+        "Next.js",
+        "Firebase Auth & Firestore",
+        "RevenueCat",
+        "Recharts",
       ],
       links: [
         {
