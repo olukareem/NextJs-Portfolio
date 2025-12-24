@@ -17,7 +17,7 @@ export const DATA = {
   summary:
     "I began my engineering career at Splice, advancing from intern to full-time Software Engineer, building complex desktop and mobile tools. Most recently, I led the engineering overhaul of Somna, where I rescued a legacy Flutter codebase and built a full-stack analytics platform. I currently partner with businesses to deliver scalable, high-performance applications, prioritizing clean architecture and technical precision.",
 
-  avatarUrl: "/images/DSC00796~3.png",
+  avatarUrl: "/images/2025.png",
   personalPhilosophy:
     "Act before you're ready, focus on consistent growth, and always seek balance.",
   ethnicBackground: "I'm Nigerian-Jamaican American",
