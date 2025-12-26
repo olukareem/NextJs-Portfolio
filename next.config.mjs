@@ -24,11 +24,11 @@ const nextConfig = {
       allowedOrigins: ["*"],
     },
     scrollRestoration: true,
-    turbo: {
-      rules: {
-        "*.svg": ["@svgr/webpack"],
-      },
-    },
+    // turbo: {
+    //   rules: {
+    //     "*.svg": ["@svgr/webpack"],
+    //   },
+    // },
   },
   // optimizeFonts: true,
   // swcMinify: true,

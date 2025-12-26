@@ -454,7 +454,7 @@ export const DATA = {
         },
       ],
       image: "/images/somna.png",
-      video: "",
+      video: "", // Standardized
     },
     {
       title: "DSP Desk - Fleet Management App",
@@ -477,6 +477,7 @@ export const DATA = {
       ],
       links: [],
       image: "/images/dsp.png",
+      video: "", // ADDED THIS TO FIX DEPLOYMENT
     },
     {
       title: "Otion",
@@ -506,6 +507,7 @@ export const DATA = {
           icon: createIcon(Icons.globe),
         },
       ],
+      image: "", // ADDED THIS TO PREVENT FUTURE ERRORS
       video: "/video/Otion_Demo.mp4",
     },
     {
@@ -553,7 +555,7 @@ export const DATA = {
     },
     {
       title: "Splice Bridge",
-      href: "https://splice.com/tools/bridge",
+      href: "https://splice.com/blog/how-to-use-splice-bridge/",
       dates: "2021 - 2022",
       active: true,
       description:
