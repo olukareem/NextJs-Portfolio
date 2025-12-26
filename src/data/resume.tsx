@@ -453,7 +453,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "",
+      image: "/images/somna.png",
       video: "",
     },
     {
@@ -476,8 +476,7 @@ export const DATA = {
         "Real-Time Database",
       ],
       links: [],
-      image: "",
-      video: "",
+      image: "/images/dsp.png",
     },
     {
       title: "Otion",
@@ -507,8 +506,7 @@ export const DATA = {
           icon: createIcon(Icons.globe),
         },
       ],
-      video:
-        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/e17b2af24f617b94feb55e413c16f501/manifest/video.m3u8",
+      video: "/video/Otion_Demo.mp4",
     },
     {
       title: "Splice Mobile",
@@ -551,8 +549,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video:
-        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/09315f52825b209740156edf4cff7a11/manifest/video.m3u8",
+      video: "/video/splice_mobile_featured.mp4",
     },
     {
       title: "Splice Bridge",
@@ -580,8 +577,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video:
-        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/6f485552046d41ad7bd4397d9c8279df/manifest/video.m3u8",
+      video: "/video/splice_bridge_clipped.mp4",
     },
     {
       title: "Splice Desktop",
@@ -609,8 +605,7 @@ export const DATA = {
         },
       ],
       image: "",
-      video:
-        "https://customer-i0qw4yckciid7sxe.cloudflarestream.com/1e6d5c239874f261895ca7e2bcc3142e/manifest/video.m3u8",
+      video: "/video/splice_desktop_clipped.mp4",
     },
   ],
 } as const;
