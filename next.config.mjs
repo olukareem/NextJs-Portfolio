@@ -7,6 +7,7 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   reactStrictMode: true,
+  // This custom Webpack config for SVGs is what triggers the Turbopack warning
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -14,6 +15,8 @@ const nextConfig = {
     });
     return config;
   },
+  // ADD THIS LINE: It silences the Turbopack/Webpack conflict error
+  turbopack: {},
   compiler: {
     reactRemoveProperties: process.env.NODE_ENV === "production",
     removeConsole: process.env.NODE_ENV === "production",
@@ -24,14 +27,7 @@ const nextConfig = {
       allowedOrigins: ["*"],
     },
     scrollRestoration: true,
-    // turbo: {
-    //   rules: {
-    //     "*.svg": ["@svgr/webpack"],
-    //   },
-    // },
   },
-  // optimizeFonts: true,
-  // swcMinify: true,
   output: "standalone",
   poweredByHeader: false,
   compress: true,
@@ -41,4 +37,5 @@ const nextConfig = {
   },
   productionBrowserSourceMaps: false,
 };
+
 export default nextConfig;
