@@ -72,13 +72,17 @@ export function ProjectCard({
       };
     }
   }, [isMounted, video]);
+// EXTENDED FALLBACK: Forces the correct path for every project if data sync is failing
+let displayImage = image;
 
-  // COMBINED FALLBACK: Fixes both DSP and Somna when data sync fails
-  let displayImage = image;
-  if (!image || image.trim() === "") {
-    if (title.includes("DSP Desk")) displayImage = "/images/dsp.png";
-    if (title.includes("Somna")) displayImage = "/images/somna.png";
-  }
+if (!image || image.trim() === "") {
+  if (title.includes("DSP Desk")) displayImage = "/images/dsp.png";
+  else if (title.includes("Somna")) displayImage = "/images/somna.png";
+  else if (title.includes("Otion")) displayImage = "/images/otion_sc.png";
+  else if (title.includes("Splice Mobile")) displayImage = "/images/splice_logo_white.png";
+  else if (title.includes("Splice Bridge")) displayImage = "/images/splice_logo_white_2.png";
+  else if (title.includes("Splice Desktop")) displayImage = "/images/splice_blue.png";
+}
 
   return (
     <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full">
