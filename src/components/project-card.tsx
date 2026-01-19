@@ -40,30 +40,50 @@ export function ProjectCard({
   className,
 }: Props) {
   const [isMounted, setIsMounted] = useState(false);
+  const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
+  // 1. DETERMINE THE SOURCE (Props first, then Hardcoded Safety Net)
+  let activeVideo = video && video.trim() !== "" ? video : null;
+  let activeImage = image && image.trim() !== "" ? image : null;
+
+  if (!activeVideo && !activeImage) {
+    if (title.includes("Somna")) activeImage = "/images/somna.png";
+    if (title.includes("DSP Desk")) activeImage = "/images/dsp.png";
+    if (title.includes("Otion")) activeVideo = "/video/Otion_Demo.mp4";
+    if (title.includes("Splice Mobile"))
+      activeVideo = "/video/splice_mobile_featured.mp4";
+    if (title.includes("Splice Bridge"))
+      activeVideo = "/video/splice_bridge_clipped.mp4";
+    if (title.includes("Splice Desktop"))
+      activeVideo = "/video/splice_desktop_clipped.mp4";
+  }
+
   useEffect(() => {
-    if (isMounted && video && video.trim() !== "" && videoRef.current) {
+    if (isMounted && activeVideo && !videoError && videoRef.current) {
       const videoElement = videoRef.current;
       let hls: Hls | null = null;
 
-      if (video.endsWith(".m3u8")) {
+      if (activeVideo.endsWith(".m3u8")) {
         if (Hls.isSupported()) {
           hls = new Hls();
-          hls.loadSource(video);
+          hls.loadSource(activeVideo);
           hls.attachMedia(videoElement);
         } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
-          videoElement.src = video;
+          videoElement.src = activeVideo;
         }
       } else {
-        videoElement.src = video;
+        videoElement.src = activeVideo;
       }
 
-      videoElement.play().catch((err) => console.log("Autoplay blocked", err));
+      videoElement.play().catch(() => {
+        // Fall back to image if the video file itself is missing
+        setVideoError(true);
+      });
 
       return () => {
         if (hls) hls.destroy();
@@ -71,18 +91,7 @@ export function ProjectCard({
         videoElement.load();
       };
     }
-  }, [isMounted, video]);
-// EXTENDED FALLBACK: Forces the correct path for every project if data sync is failing
-let displayImage = image;
-
-if (!image || image.trim() === "") {
-  if (title.includes("DSP Desk")) displayImage = "/images/dsp.png";
-  else if (title.includes("Somna")) displayImage = "/images/somna.png";
-  else if (title.includes("Otion")) displayImage = "/images/otion_sc.png";
-  else if (title.includes("Splice Mobile")) displayImage = "/images/splice_logo_white.png";
-  else if (title.includes("Splice Bridge")) displayImage = "/images/splice_logo_white_2.png";
-  else if (title.includes("Splice Desktop")) displayImage = "/images/splice_blue.png";
-}
+  }, [isMounted, activeVideo, videoError]);
 
   return (
     <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full">
@@ -91,28 +100,33 @@ if (!image || image.trim() === "") {
         className={cn("block cursor-pointer", className)}
       >
         <div className="relative h-40 w-full overflow-hidden bg-secondary">
-          {video && video.trim() !== "" && isMounted ? (
+          {/* Priority 1: Video */}
+          {activeVideo && !videoError && isMounted ? (
             <video
               ref={videoRef}
               autoPlay
               loop
               muted
               playsInline
+              onError={() => setVideoError(true)}
               className="pointer-events-none mx-auto h-full w-full object-cover object-top"
             />
-          ) : displayImage ? (
+          ) : activeImage ? (
+            /* Priority 2: Image Backup */
             <img
-              src={displayImage}
+              src={activeImage}
               alt={title}
               className="h-full w-full object-cover object-top"
             />
           ) : (
+            /* Priority 3: Fallback */
             <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
               No Preview Available
             </div>
           )}
         </div>
       </Link>
+
       <CardHeader className="px-2">
         <div className="space-y-1">
           <CardTitle className="mt-1 text-base">{title}</CardTitle>
@@ -122,6 +136,7 @@ if (!image || image.trim() === "") {
           </Markdown>
         </div>
       </CardHeader>
+
       <CardContent className="mt-auto flex flex-col px-2">
         {tags && tags.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
@@ -137,6 +152,7 @@ if (!image || image.trim() === "") {
           </div>
         )}
       </CardContent>
+
       <CardFooter className="px-2 pb-2">
         {links && links.length > 0 && (
           <div className="flex flex-row flex-wrap items-start gap-1">

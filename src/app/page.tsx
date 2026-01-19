@@ -17,22 +17,27 @@ import { useContactDialog } from "@/contexts/contact-dialog-context";
 // Lazy load heavy components
 const Markdown = dynamic(() => import("react-markdown"), {
   loading: () => <div className="animate-pulse h-20 bg-muted rounded" />,
-  ssr: false
+  ssr: false,
 });
 
-const DynamicStackCarousel = dynamic(() => import("@/components/stack-carousel"), {
-  loading: () => <div className="animate-pulse h-40 bg-muted rounded" />,
-  ssr: false
-});
+const DynamicStackCarousel = dynamic(
+  () => import("@/components/stack-carousel"),
+  {
+    loading: () => <div className="animate-pulse h-40 bg-muted rounded" />,
+    ssr: false,
+  }
+);
 
 const ContactDialog = dynamic(() => import("@/components/contact-dialog"), {
   loading: () => <div className="animate-pulse h-96 bg-muted rounded-lg" />,
-  ssr: false
+  ssr: false,
 });
 
 // Constants
 const BLUR_FADE_DELAY = 0.04;
-const LOADING_PLACEHOLDER = <div className="animate-pulse h-40 bg-muted rounded" />;
+const LOADING_PLACEHOLDER = (
+  <div className="animate-pulse h-40 bg-muted rounded" />
+);
 
 export default function Page() {
   const { setIsContactDialogOpen } = useContactDialog();
@@ -212,7 +217,7 @@ export default function Page() {
                     dates={project.dates}
                     tags={project.technologies}
                     // image={project.image}
-                    video={project.video}
+                    // video={project.video}
                     links={project.links}
                   />
                 </BlurFade>
@@ -238,8 +243,8 @@ export default function Page() {
               </Button>
               <ContactDialog />
               <p className="mx-auto max-w-[600px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                Let&apos;s talk. Click the button above to send me an email directly
-                from this page or reach out to me at olukareem@pm.me
+                Let&apos;s talk. Click the button above to send me an email
+                directly from this page or reach out to me at olukareem@pm.me
               </p>
             </div>
           </BlurFade>
