@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Markdown from "react-markdown";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import Hls from "hls.js";
 
 interface Props {
@@ -47,43 +47,47 @@ export function ProjectCard({
     setIsMounted(true);
   }, []);
 
-  // 1. DETERMINE THE SOURCE (Props first, then Hardcoded Safety Net)
-  let activeVideo = video && video.trim() !== "" ? video : null;
-  let activeImage = image && image.trim() !== "" ? image : null;
+  // 1. STABILIZE SOURCES: This prevents the "useEffect changed size" error
+  const sources = useMemo(() => {
+    let activeVideo = video && video.trim() !== "" ? video : null;
+    let activeImage = image && image.trim() !== "" ? image : null;
 
-  if (!activeVideo && !activeImage) {
-    if (title.includes("Somna")) activeImage = "/images/somna.png";
-    if (title.includes("DSP Desk")) activeImage = "/images/dsp.png";
-    if (title.includes("Otion")) activeVideo = "/video/Otion_Demo.mp4";
-    if (title.includes("Splice Mobile"))
-      activeVideo = "/video/splice_mobile_featured.mp4";
-    if (title.includes("Splice Bridge"))
-      activeVideo = "/video/splice_bridge_clipped.mp4";
-    if (title.includes("Splice Desktop"))
-      activeVideo = "/video/splice_desktop_clipped.mp4";
-  }
+    // Hardcoded safety net if props arrive empty from a ghost file
+    if (!activeVideo && !activeImage) {
+      if (title.toLowerCase().includes("somna"))
+        activeImage = "/images/somna.png";
+      if (title.toLowerCase().includes("dsp desk"))
+        activeImage = "/images/dsp.png";
+      if (title.toLowerCase().includes("otion"))
+        activeVideo = "/video/Otion_Demo.mp4";
+      if (title.toLowerCase().includes("mobile"))
+        activeVideo = "/video/splice_mobile_featured.mp4";
+      if (title.toLowerCase().includes("bridge"))
+        activeVideo = "/video/splice_bridge_clipped.mp4";
+      if (title.toLowerCase().includes("desktop"))
+        activeVideo = "/video/splice_desktop_clipped.mp4";
+    }
+    return { activeVideo, activeImage };
+  }, [title, image, video]);
 
   useEffect(() => {
-    if (isMounted && activeVideo && !videoError && videoRef.current) {
+    if (isMounted && sources.activeVideo && !videoError && videoRef.current) {
       const videoElement = videoRef.current;
       let hls: Hls | null = null;
 
-      if (activeVideo.endsWith(".m3u8")) {
+      if (sources.activeVideo.endsWith(".m3u8")) {
         if (Hls.isSupported()) {
           hls = new Hls();
-          hls.loadSource(activeVideo);
+          hls.loadSource(sources.activeVideo);
           hls.attachMedia(videoElement);
         } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
-          videoElement.src = activeVideo;
+          videoElement.src = sources.activeVideo;
         }
       } else {
-        videoElement.src = activeVideo;
+        videoElement.src = sources.activeVideo;
       }
 
-      videoElement.play().catch(() => {
-        // Fall back to image if the video file itself is missing
-        setVideoError(true);
-      });
+      videoElement.play().catch(() => setVideoError(true));
 
       return () => {
         if (hls) hls.destroy();
@@ -91,17 +95,16 @@ export function ProjectCard({
         videoElement.load();
       };
     }
-  }, [isMounted, activeVideo, videoError]);
+  }, [isMounted, sources.activeVideo, videoError]);
 
   return (
-    <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 ease-out h-full">
+    <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 h-full">
       <Link
         href={href || "#"}
         className={cn("block cursor-pointer", className)}
       >
         <div className="relative h-40 w-full overflow-hidden bg-secondary">
-          {/* Priority 1: Video */}
-          {activeVideo && !videoError && isMounted ? (
+          {sources.activeVideo && !videoError && isMounted ? (
             <video
               ref={videoRef}
               autoPlay
@@ -111,15 +114,13 @@ export function ProjectCard({
               onError={() => setVideoError(true)}
               className="pointer-events-none mx-auto h-full w-full object-cover object-top"
             />
-          ) : activeImage ? (
-            /* Priority 2: Image Backup */
+          ) : sources.activeImage ? (
             <img
-              src={activeImage}
+              src={sources.activeImage}
               alt={title}
               className="h-full w-full object-cover object-top"
             />
           ) : (
-            /* Priority 3: Fallback */
             <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
               No Preview Available
             </div>
@@ -152,21 +153,6 @@ export function ProjectCard({
           </div>
         )}
       </CardContent>
-
-      <CardFooter className="px-2 pb-2">
-        {links && links.length > 0 && (
-          <div className="flex flex-row flex-wrap items-start gap-1">
-            {links.map((link, idx) => (
-              <Link href={link.href} key={idx} target="_blank">
-                <Badge className="flex gap-2 px-2 py-1 text-[10px]">
-                  {link.icon}
-                  {link.type}
-                </Badge>
-              </Link>
-            ))}
-          </div>
-        )}
-      </CardFooter>
     </Card>
   );
 }
