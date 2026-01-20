@@ -46,12 +46,12 @@ export function ProjectCard({
     setIsMounted(true);
   }, []);
 
-  // Stabilize data sources to fix the console error
+  // Stabilize data sources to fix the console error and handle ghost data
   const sources = useMemo(() => {
     let activeVideo = video && video.trim() !== "" ? video : null;
     let activeImage = image && image.trim() !== "" ? image : null;
 
-    // Safety fallback for ghost file issues
+    // Hardcoded safety fallback for deployment sync issues
     if (!activeVideo && !activeImage) {
       const lowerTitle = title.toLowerCase();
       if (lowerTitle.includes("somna")) activeImage = "/images/somna.png";
@@ -93,7 +93,7 @@ export function ProjectCard({
         videoElement.load();
       };
     }
-  }, [isMounted, sources.activeVideo, videoError]);
+  }, [isMounted, sources.activeVideo, videoError, title]);
 
   return (
     <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 h-full">
@@ -125,6 +125,7 @@ export function ProjectCard({
           )}
         </div>
       </Link>
+
       <CardHeader className="px-2">
         <div className="space-y-1">
           <CardTitle className="mt-1 text-base">{title}</CardTitle>
@@ -134,6 +135,7 @@ export function ProjectCard({
           </Markdown>
         </div>
       </CardHeader>
+
       <CardContent className="mt-auto flex flex-col px-2">
         <div className="mt-2 flex flex-wrap gap-1">
           {tags.map((tag) => (
