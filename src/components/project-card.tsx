@@ -33,7 +33,6 @@ export function ProjectCard({
   description,
   dates,
   tags,
-  link,
   image,
   video,
   links,
@@ -47,24 +46,23 @@ export function ProjectCard({
     setIsMounted(true);
   }, []);
 
-  // 1. STABILIZE SOURCES: This prevents the "useEffect changed size" error
+  // Stabilize data sources to fix the console error
   const sources = useMemo(() => {
     let activeVideo = video && video.trim() !== "" ? video : null;
     let activeImage = image && image.trim() !== "" ? image : null;
 
-    // Hardcoded safety net if props arrive empty from a ghost file
+    // Safety fallback for ghost file issues
     if (!activeVideo && !activeImage) {
-      if (title.toLowerCase().includes("somna"))
-        activeImage = "/images/somna.png";
-      if (title.toLowerCase().includes("dsp desk"))
-        activeImage = "/images/dsp.png";
-      if (title.toLowerCase().includes("otion"))
+      const lowerTitle = title.toLowerCase();
+      if (lowerTitle.includes("somna")) activeImage = "/images/somna.png";
+      else if (lowerTitle.includes("dsp desk")) activeImage = "/images/dsp.png";
+      else if (lowerTitle.includes("otion"))
         activeVideo = "/video/Otion_Demo.mp4";
-      if (title.toLowerCase().includes("mobile"))
+      else if (lowerTitle.includes("mobile"))
         activeVideo = "/video/splice_mobile_featured.mp4";
-      if (title.toLowerCase().includes("bridge"))
+      else if (lowerTitle.includes("bridge"))
         activeVideo = "/video/splice_bridge_clipped.mp4";
-      if (title.toLowerCase().includes("desktop"))
+      else if (lowerTitle.includes("desktop"))
         activeVideo = "/video/splice_desktop_clipped.mp4";
     }
     return { activeVideo, activeImage };
@@ -127,7 +125,6 @@ export function ProjectCard({
           )}
         </div>
       </Link>
-
       <CardHeader className="px-2">
         <div className="space-y-1">
           <CardTitle className="mt-1 text-base">{title}</CardTitle>
@@ -137,21 +134,18 @@ export function ProjectCard({
           </Markdown>
         </div>
       </CardHeader>
-
       <CardContent className="mt-auto flex flex-col px-2">
-        {tags && tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
-            {tags.map((tag) => (
-              <Badge
-                className="px-1 py-0 text-[10px]"
-                variant="secondary"
-                key={tag}
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
+        <div className="mt-2 flex flex-wrap gap-1">
+          {tags.map((tag) => (
+            <Badge
+              className="px-1 py-0 text-[10px]"
+              variant="secondary"
+              key={tag}
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
       </CardContent>
     </Card>
   );
