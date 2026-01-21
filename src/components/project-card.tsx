@@ -1,13 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Markdown from "react-markdown";
@@ -46,24 +40,21 @@ export function ProjectCard({
     setIsMounted(true);
   }, []);
 
-  // 1. STABILIZE SOURCES: This prevents the "useEffect changed size" error
+  // Stabilize data and ensure every project has an image backup
   const sources = useMemo(() => {
     let activeVideo = video && video.trim() !== "" ? video : null;
     let activeImage = image && image.trim() !== "" ? image : null;
 
-    // Hardcoded safety net: If props arrive empty or broken from a ghost file
-    if (!activeVideo && !activeImage) {
-      const t = title.toLowerCase();
-      if (t.includes("somna")) activeImage = "/images/somna.png";
-      else if (t.includes("dsp desk")) activeImage = "/images/dsp.png";
-      else if (t.includes("otion")) activeVideo = "/video/Otion_Demo.mp4";
-      else if (t.includes("mobile"))
-        activeVideo = "/video/splice_mobile_featured.mp4";
-      else if (t.includes("bridge"))
-        activeVideo = "/video/splice_bridge_clipped.mp4";
-      else if (t.includes("desktop"))
-        activeVideo = "/video/splice_desktop_clipped.mp4";
-    }
+    // Use your EXACT file names from the 'find public' output
+    const t = title.toLowerCase();
+    if (t.includes("somna")) activeImage = "/images/somna.png";
+    if (t.includes("dsp desk")) activeImage = "/images/dsp.png";
+    if (t.includes("otion")) activeImage = "/images/otion_sc.png";
+    if (t.includes("splice mobile"))
+      activeImage = "/images/splice_logo_white.png";
+    if (t.includes("bridge")) activeImage = "/images/splice_logo_white2.png";
+    if (t.includes("desktop")) activeImage = "/images/splice_blue.png";
+
     return { activeVideo, activeImage };
   }, [title, image, video]);
 
@@ -84,7 +75,11 @@ export function ProjectCard({
         videoElement.src = sources.activeVideo;
       }
 
-      videoElement.play().catch(() => setVideoError(true));
+      // REMOVED setVideoError(true) from here.
+      // If autoplay is blocked, we just let it sit paused.
+      videoElement
+        .play()
+        .catch(() => console.log("Autoplay paused by browser"));
 
       return () => {
         if (hls) hls.destroy();
@@ -92,7 +87,8 @@ export function ProjectCard({
         videoElement.load();
       };
     }
-  }, [isMounted, sources.activeVideo, videoError]);
+    // Fixed dependency array size
+  }, [isMounted, sources.activeVideo, videoError, title]);
 
   return (
     <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 h-full">
@@ -101,7 +97,7 @@ export function ProjectCard({
         className={cn("block cursor-pointer", className)}
       >
         <div className="relative h-40 w-full overflow-hidden bg-secondary">
-          {/* Priority 1: Video */}
+          {/* Priority: Video file must exist and not have a 404 error */}
           {sources.activeVideo && !videoError && isMounted ? (
             <video
               ref={videoRef}
@@ -109,25 +105,22 @@ export function ProjectCard({
               loop
               muted
               playsInline
-              onError={() => setVideoError(true)}
+              onError={() => setVideoError(true)} // Only triggers on actual 404/file error
               className="pointer-events-none mx-auto h-full w-full object-cover object-top"
             />
           ) : sources.activeImage ? (
-            /* Priority 2: Image Backup */
             <img
               src={sources.activeImage}
               alt={title}
               className="h-full w-full object-cover object-top"
             />
           ) : (
-            /* Final Fallback */
             <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
-              No Preview Available
+              No Preview Found
             </div>
           )}
         </div>
       </Link>
-
       <CardHeader className="px-2">
         <div className="space-y-1">
           <CardTitle className="mt-1 text-base">{title}</CardTitle>
@@ -137,21 +130,18 @@ export function ProjectCard({
           </Markdown>
         </div>
       </CardHeader>
-
       <CardContent className="mt-auto flex flex-col px-2">
-        {tags && tags.length > 0 && (
-          <div className="mt-2 flex flex-wrap gap-1">
-            {tags.map((tag) => (
-              <Badge
-                className="px-1 py-0 text-[10px]"
-                variant="secondary"
-                key={tag}
-              >
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
+        <div className="mt-2 flex flex-wrap gap-1">
+          {tags.map((tag) => (
+            <Badge
+              className="px-1 py-0 text-[10px]"
+              variant="secondary"
+              key={tag}
+            >
+              {tag}
+            </Badge>
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

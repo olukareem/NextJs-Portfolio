@@ -454,7 +454,7 @@ export const DATA = {
         },
       ],
       image: "/images/somna.png",
-      video: "", // Standardized
+      video: "", 
     },
     {
       title: "DSP Desk - Fleet Management App",
