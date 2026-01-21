@@ -46,23 +46,22 @@ export function ProjectCard({
     setIsMounted(true);
   }, []);
 
-  // Stabilize data sources to fix the console error and handle ghost data
+  // 1. STABILIZE SOURCES: This prevents the "useEffect changed size" error
   const sources = useMemo(() => {
     let activeVideo = video && video.trim() !== "" ? video : null;
     let activeImage = image && image.trim() !== "" ? image : null;
 
-    // Hardcoded safety fallback for deployment sync issues
+    // Hardcoded safety net: If props arrive empty or broken from a ghost file
     if (!activeVideo && !activeImage) {
-      const lowerTitle = title.toLowerCase();
-      if (lowerTitle.includes("somna")) activeImage = "/images/somna.png";
-      else if (lowerTitle.includes("dsp desk")) activeImage = "/images/dsp.png";
-      else if (lowerTitle.includes("otion"))
-        activeVideo = "/video/Otion_Demo.mp4";
-      else if (lowerTitle.includes("mobile"))
+      const t = title.toLowerCase();
+      if (t.includes("somna")) activeImage = "/images/somna.png";
+      else if (t.includes("dsp desk")) activeImage = "/images/dsp.png";
+      else if (t.includes("otion")) activeVideo = "/video/Otion_Demo.mp4";
+      else if (t.includes("mobile"))
         activeVideo = "/video/splice_mobile_featured.mp4";
-      else if (lowerTitle.includes("bridge"))
+      else if (t.includes("bridge"))
         activeVideo = "/video/splice_bridge_clipped.mp4";
-      else if (lowerTitle.includes("desktop"))
+      else if (t.includes("desktop"))
         activeVideo = "/video/splice_desktop_clipped.mp4";
     }
     return { activeVideo, activeImage };
@@ -93,7 +92,7 @@ export function ProjectCard({
         videoElement.load();
       };
     }
-  }, [isMounted, sources.activeVideo, videoError, title]);
+  }, [isMounted, sources.activeVideo, videoError]);
 
   return (
     <Card className="flex flex-col overflow-hidden border hover:shadow-lg transition-all duration-300 h-full">
@@ -102,6 +101,7 @@ export function ProjectCard({
         className={cn("block cursor-pointer", className)}
       >
         <div className="relative h-40 w-full overflow-hidden bg-secondary">
+          {/* Priority 1: Video */}
           {sources.activeVideo && !videoError && isMounted ? (
             <video
               ref={videoRef}
@@ -113,12 +113,14 @@ export function ProjectCard({
               className="pointer-events-none mx-auto h-full w-full object-cover object-top"
             />
           ) : sources.activeImage ? (
+            /* Priority 2: Image Backup */
             <img
               src={sources.activeImage}
               alt={title}
               className="h-full w-full object-cover object-top"
             />
           ) : (
+            /* Final Fallback */
             <div className="flex h-full items-center justify-center text-xs text-muted-foreground">
               No Preview Available
             </div>
@@ -137,17 +139,19 @@ export function ProjectCard({
       </CardHeader>
 
       <CardContent className="mt-auto flex flex-col px-2">
-        <div className="mt-2 flex flex-wrap gap-1">
-          {tags.map((tag) => (
-            <Badge
-              className="px-1 py-0 text-[10px]"
-              variant="secondary"
-              key={tag}
-            >
-              {tag}
-            </Badge>
-          ))}
-        </div>
+        {tags && tags.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {tags.map((tag) => (
+              <Badge
+                className="px-1 py-0 text-[10px]"
+                variant="secondary"
+                key={tag}
+              >
+                {tag}
+              </Badge>
+            ))}
+          </div>
+        )}
       </CardContent>
     </Card>
   );
